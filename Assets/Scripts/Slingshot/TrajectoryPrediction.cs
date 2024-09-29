@@ -95,8 +95,8 @@ namespace Slingshot
 					);
 				if (isCollisionDetected)
 				{
-					SetTrajectoryDotPositionAndRevealIt(dotIndex, hit.point);
-					SetHitMarker(hit.point);
+					// SetTrajectoryDotPositionAndRevealIt(dotIndex, hit.point);
+					SetHitMarkerPositionAndRevealIt(hit.point);
 					
 					isHitGround = true;
 				}
@@ -104,6 +104,8 @@ namespace Slingshot
 				{
 					p = pNext;
 					SetTrajectoryDotPositionAndRevealIt(dotIndex, p);
+
+                    lastUsedDotIndex = dotIndex;
 				}
 			}
 
@@ -163,16 +165,17 @@ namespace Slingshot
 					distance);
 		}
 
-		private void SetHitMarker(Vector3 position)
+		private void SetHitMarkerPositionAndRevealIt(Vector3 position)
 		{
 			_hitMark.transform.position = position;
+			_hitMark.SetActive(true);
 		}
 
         private void HideUnusedDotsStartingFrom(int lastUsedDotIndex)
         {
 			bool isLastDotActive = true;
 			for (
-				int dotIndex = lastUsedDotIndex; 
+				int dotIndex = lastUsedDotIndex + 1; 
 				dotIndex < _trajectoryDots.Count && isLastDotActive; 
 				dotIndex++)
 			{
