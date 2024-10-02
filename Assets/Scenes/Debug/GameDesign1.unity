@@ -312,7 +312,7 @@ PrefabInstance:
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21
+      value: 0.266
       objectReference: {fileID: 0}
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
@@ -1185,7 +1185,7 @@ PrefabInstance:
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21
+      value: 0.266
       objectReference: {fileID: 0}
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
@@ -1325,7 +1325,7 @@ PrefabInstance:
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.335
+      value: 1.391
       objectReference: {fileID: 0}
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
@@ -1586,7 +1586,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1092026808}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1641,27 +1641,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fee2b3e664870efae44a4433f8bad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _touchInputAction:
-    m_Name: Touch Input
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 6a2066d6-a112-43c4-9633-0eb49d22fde8
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: fced9181-122b-43f0-9b1a-d2f5daaab812
-      m_Path: <Touchscreen>/position
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Touch Input
-      m_Flags: 0
-    m_Flags: 0
   _throwableContainerScript: {fileID: 1215113534}
-  _touchPlaneLayer:
-    serializedVersion: 2
-    m_Bits: 1024
+  _slingshotSpringInput: {fileID: 1602907547}
+  _shotPointActual: {fileID: 1215113533}
+  _shotPointReference: {fileID: 414144226}
+  _tensionForcePerDistanceUnit: 50
 --- !u!1 &1095990120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1774,9 +1758,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _throwablesBag: {fileID: 1839144816}
   CurrentThrowable: {fileID: 0}
-  ShotPointActual: {fileID: 1215113533}
-  ShotPointReference: {fileID: 414144226}
-  _tensionForcePerDistanceUnit: 50
 --- !u!1 &1227964374
 GameObject:
   m_ObjectHideFlags: 0
@@ -2189,7 +2170,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 40
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2216,7 +2197,7 @@ Transform:
   m_GameObject: {fileID: 1466662262}
   serializedVersion: 2
   m_LocalRotation: {x: 0.043619405, y: -0, z: -0, w: 0.9990483}
-  m_LocalPosition: {x: 1.8, y: 2, z: -3.2}
+  m_LocalPosition: {x: 2.14, y: 2.089, z: -4.366}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2334,7 +2315,7 @@ Transform:
   m_GameObject: {fileID: 1543783012}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 16}
+  m_LocalPosition: {x: 0, y: 1, z: 16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2361,7 +2342,7 @@ PrefabInstance:
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.335
+      value: 1.391
       objectReference: {fileID: 0}
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
@@ -2423,6 +2404,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1602907546}
+  - component: {fileID: 1602907547}
   m_Layer: 0
   m_Name: UserInput
   m_TagString: Untagged
@@ -2445,6 +2427,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1602907547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602907545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4779b37c17dcfa62b9e61e6859b10d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _touchInputAction:
+    m_Name: Touch Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c939d246-ab8e-476c-9180-6a9dc2652009
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 3aa14778-a1fa-4658-9cf9-7d53eb4ebff9
+      m_Path: <Touchscreen>/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Input
+      m_Flags: 0
+    m_Flags: 0
+  _touchPlaneLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1001 &1725266406
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2753,7 +2767,7 @@ PrefabInstance:
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.339
+      value: 1.395
       objectReference: {fileID: 0}
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
@@ -3289,7 +3303,7 @@ PrefabInstance:
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21
+      value: 0.266
       objectReference: {fileID: 0}
     - target: {fileID: 5437674220329614259, guid: 715397808b0335183bdd306c568c11ec,
         type: 3}
@@ -3786,10 +3800,20 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6936103993301982588, guid: b57ab8edc63ce8aab86ac34d3bf817a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8632018953327715281, guid: b57ab8edc63ce8aab86ac34d3bf817a5,
         type: 3}
       propertyPath: m_Name
       value: Version2-Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 8796539227653068418, guid: b57ab8edc63ce8aab86ac34d3bf817a5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
