@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GameCamera
+namespace AngryBirds3D.GameCamera
 {
     public class LevelFocus : MonoBehaviour
     {

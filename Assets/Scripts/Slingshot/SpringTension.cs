@@ -1,8 +1,8 @@
 using System;
-using Managers;
+using AngryBirds3D.Managers;
 using UnityEngine;
 
-namespace Slingshot
+namespace AngryBirds3D.Slingshot
 {
     public class SpringTension : MonoBehaviour
     {

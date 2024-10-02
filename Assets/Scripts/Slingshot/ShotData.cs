@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Slingshot
+namespace AngryBirds3D.Slingshot
 {
     public struct ShotData
     {

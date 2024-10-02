@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Slingshot
+namespace AngryBirds3D.Slingshot
 {
 	public class TrajectoryPrediction : MonoBehaviour
 	{

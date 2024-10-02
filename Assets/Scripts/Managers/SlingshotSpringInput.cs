@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
-namespace Managers
+namespace AngryBirds3D.Managers
 {
     public class SlingshotSpringInput : MonoBehaviour
     {

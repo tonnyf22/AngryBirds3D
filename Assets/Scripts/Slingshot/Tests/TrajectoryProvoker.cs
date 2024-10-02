@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Slingshot.Tests
+namespace AngryBirds3D.Slingshot.Tests
 {
 	public class TrajectoryProvoker : MonoBehaviour
 	{
