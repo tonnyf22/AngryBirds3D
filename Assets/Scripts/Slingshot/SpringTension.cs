@@ -1,133 +1,124 @@
 using System;
-using UnityEditor.DeviceSimulation;
+using Managers;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
-using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace Slingshot
 {
     public class SpringTension : MonoBehaviour
     {
         [SerializeField]
-        private InputAction _touchInputAction;
-
-        [SerializeField]
         private ThrowableManager _throwableContainerScript;
 
         [SerializeField]
-        private LayerMask _touchPlaneLayer;
+        private SlingshotSpringInput _slingshotSpringInput;
 
-        private Camera _camera;
+        [SerializeField]
+        private Transform _shotPointActual;
+        private Vector3 _shotPointActualInitPosition;
+        [SerializeField]
+        private Transform _shotPointReference;
 
-        // raycast related
-        private Vector2 _touchPosition;
-        private Ray _ray;
-        private RaycastHit _hit;
+        [SerializeField]
+        [Range(30.0f, 100.0f)]
+        private float _tensionForcePerDistanceUnit;
 
-        // touch event
-        private event Action ServeTouchInputEvent;
-
-        // input coeffs
-        private bool _isHoldingStretch = false;
+        void Start()
+        {
+            _shotPointActualInitPosition = _shotPointActual.position;
+        }
 
         void OnEnable()
         {
-            _touchInputAction.Enable();
+            _slingshotSpringInput
+                .ChangeThrowablePositionEvent += ChangeThrowablePosition;
+            _slingshotSpringInput
+                .InitiateReleaseLogicEvent += InitiateReleaseLogic;
         }
 
         void OnDisable()
         {
-            _touchInputAction.Disable();
+            _slingshotSpringInput
+                .ChangeThrowablePositionEvent -= ChangeThrowablePosition;
+            _slingshotSpringInput
+                .InitiateReleaseLogicEvent -= InitiateReleaseLogic;
         }
 
-        void Start()
+        private void ChangeThrowablePosition(Vector3 position)
         {
-            _camera = Camera.main;
-
-            ServeTouchInputEvent += ServeTouchInput;
-        }
-
-        void Update()
-        {
-            ServeTouchInputEvent?.Invoke();
-        }
-
-        private void ServeTouchInput()
-        {
-            if (_touchInputAction.triggered)
-            {
-                RaycastFromTouchPosition();
-            }
-            else
-            {
-                CheckInputRelease();
-            }
-        }
-
-        private void RaycastFromTouchPosition()
-        {
-            _touchPosition = _touchInputAction.ReadValue<Vector2>();
-
-            if (IsHitTouchPlane())
-            {
-                ChangeHoldingStretchState(true);
-
-                ChangeThrowablePosition();
-            }
-        }
-
-        private bool IsHitTouchPlane()
-        {
-            _ray = _camera.ScreenPointToRay(_touchPosition);
-
-            return Physics.Raycast(_ray, out _hit, _touchPlaneLayer);
-        }
-
-        private void ChangeHoldingStretchState(bool isHolding)
-        {
-            _isHoldingStretch = isHolding;
-
-            if (!isHolding)
-            {
-                InitiateReleaseLogic();
-            }
-        }
-
-        private void ChangeThrowablePosition()
-        {
-           _throwableContainerScript.ShotPointActual.position = _hit.point;
-        }
-
-        private void CheckInputRelease()
-        {
-            if (Touch.activeTouches.Count > 0)
-            {
-                Touch touch = Touch.activeTouches[0];
-
-                if (touch.phase == TouchPhase.Ended ||
-                    touch.phase == TouchPhase.Canceled)
-                {
-                    ChangeHoldingStretchState(false);
-                }
-            }
+           _shotPointActual.position = position;
         }
 
         private void InitiateReleaseLogic()
         {
-            _throwableContainerScript.ReleaseCurrentThrowable();
+            ReleaseCurrentThrowable();
+
+            // separate calls, but together for now
 
             _throwableContainerScript.SetupNewThrowableToShoot();
 
-            CheckCurrentThrowableToMaintainServiceOfTouchInput();
+            RestoreShotPointActualInitPosition();
         }
 
-        private void CheckCurrentThrowableToMaintainServiceOfTouchInput()
+        private void ReleaseCurrentThrowable()
         {
-            if (_throwableContainerScript.CurrentThrowable == null)
-            {
-                ServeTouchInputEvent -= ServeTouchInput;
-            }
+            Rigidbody rigidbody = SetUpPhysicsForThrowable();
+
+            float stretchDistance = CalculateDistanceToShotReference();
+            Vector3 forceDirection = CalculateAppliedForceDirection();
+
+            _throwableContainerScript.FreeThrowable();
+            ApplyImpulseToThrowable(rigidbody, forceDirection, stretchDistance);
+            _throwableContainerScript.ForgetThrowable();
+        }
+
+        private Rigidbody SetUpPhysicsForThrowable()
+        {
+            _throwableContainerScript.CurrentThrowable.AddComponent<SphereCollider>();
+
+            // get this data from the actual throwable
+            Rigidbody rb = _throwableContainerScript.CurrentThrowable.AddComponent<Rigidbody>();
+            rb.mass = 6;
+            rb.angularDrag = 3;
+
+            return rb;
+        }
+
+        private float CalculateDistanceToShotReference()
+        {
+            float distance = 
+                Vector3.Distance(
+                    _shotPointReference.position,
+                    _shotPointActual.position
+                );
+
+            // Debug.Log("Distance: " + distance);
+
+            return distance;
+        }
+
+        private Vector3 CalculateAppliedForceDirection()
+        {
+            Vector3 direction =
+                (_shotPointReference.position - _shotPointActual.position)
+                .normalized;
+
+            return direction;
+        }
+
+        private void ApplyImpulseToThrowable(
+            Rigidbody rigidbody,
+            Vector3 forceDirection,
+            float stretchDistance)
+        {
+            rigidbody.AddForce(
+                _tensionForcePerDistanceUnit * stretchDistance *
+                forceDirection,
+                ForceMode.Impulse);
+        }
+
+        private void RestoreShotPointActualInitPosition()
+        {
+            _shotPointActual.position = _shotPointActualInitPosition;
         }
     }
 }
