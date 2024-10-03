@@ -79,6 +79,7 @@ namespace AngryBirds3D.Slingshot
             Rigidbody rb = _throwableContainerScript.CurrentThrowable.AddComponent<Rigidbody>();
             rb.mass = 6;
             rb.angularDrag = 3;
+            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
 
             return rb;
         }
