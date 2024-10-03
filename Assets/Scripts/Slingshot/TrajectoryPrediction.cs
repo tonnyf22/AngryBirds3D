@@ -143,8 +143,7 @@ namespace AngryBirds3D.Slingshot
         private Vector3 CalculateNextPosition(
 			Vector3 position,
 			Vector3 velocity,
-			float timeInterval
-		)
+			float timeInterval)
         {
             Vector3 positionNext = 
 				position + velocity * timeInterval;
@@ -171,7 +170,7 @@ namespace AngryBirds3D.Slingshot
 			_hitMark.SetActive(true);
 		}
 
-        private void HideUnusedDotsStartingFrom(int lastUsedDotIndex)
+        public void HideUnusedDotsStartingFrom(int lastUsedDotIndex)
         {
 			bool isLastDotActive = true;
 			for (
@@ -184,7 +183,7 @@ namespace AngryBirds3D.Slingshot
 			}
         }
 
-        private void HideHitMark()
+        public void HideHitMark()
         {
 			if (_hitMark.activeInHierarchy)
 			{

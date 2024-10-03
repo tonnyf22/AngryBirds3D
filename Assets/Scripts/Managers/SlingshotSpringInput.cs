@@ -9,6 +9,7 @@ namespace AngryBirds3D.Managers
     public class SlingshotSpringInput : MonoBehaviour
     {
         public event Action<Vector3> ChangeThrowablePositionEvent;
+        public event Action RecalculateTrajectoryPredictionEvent;
         public event Action InitiateReleaseLogicEvent;
 
         [SerializeField]
@@ -41,6 +42,7 @@ namespace AngryBirds3D.Managers
         {
             _camera = Camera.main;
 
+            // stop serving when there are no throwable remain
             ServeTouchInputEvent += ServeTouchInput;
         }
 
@@ -65,8 +67,9 @@ namespace AngryBirds3D.Managers
 
             if (IsHitTouchPlane())
             {
-                // event call
                 ChangeThrowablePositionEvent?.Invoke(_hit.point);
+
+                RecalculateTrajectoryPredictionEvent?.Invoke();
             }
         }
 
@@ -85,7 +88,6 @@ namespace AngryBirds3D.Managers
 
                 if (touch.phase == TouchPhase.Ended)
                 {
-                    // event call
                     InitiateReleaseLogicEvent?.Invoke();
 
                     // ServeTouchInputEvent -= ServeTouchInput;

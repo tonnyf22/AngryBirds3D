@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace AngryBirds3D.Slingshot
 {
-    public class ThrowableManager : MonoBehaviour
+    public class ThrowableContainer : MonoBehaviour
     {
         [SerializeField]
         private GameObject _throwablesBag;

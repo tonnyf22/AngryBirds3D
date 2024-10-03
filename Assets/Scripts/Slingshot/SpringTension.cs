@@ -4,126 +4,181 @@ using UnityEngine;
 
 namespace AngryBirds3D.Slingshot
 {
-    public class SpringTension : MonoBehaviour
-    {
-        [SerializeField]
-        private ThrowableManager _throwableContainerScript;
+	public class SpringTension : MonoBehaviour
+	{
+		[SerializeField]
+		private ThrowableContainer _throwableContainerScript;
 
-        [SerializeField]
-        private SlingshotSpringInput _slingshotSpringInput;
+		[SerializeField]
+		private SlingshotSpringInput _slingshotSpringInput;
 
-        [SerializeField]
-        private Transform _shotPointActual;
-        private Vector3 _shotPointActualInitPosition;
-        [SerializeField]
-        private Transform _shotPointReference;
+		[SerializeField]
+		private Transform _shotPointActual;
+		private Vector3 _shotPointActualInitPosition;
+		[SerializeField]
+		private Transform _shotPointReference;
 
-        [SerializeField]
-        [Range(30.0f, 100.0f)]
-        private float _tensionForcePerDistanceUnit;
+		[SerializeField]
+		[Range(30.0f, 100.0f)]
+		private float _tensionForcePerDistanceUnit;
 
-        void Start()
-        {
-            _shotPointActualInitPosition = _shotPointActual.position;
-        }
+		private TrajectoryPrediction _trajectoryPrediction;
 
-        void OnEnable()
-        {
-            _slingshotSpringInput
-                .ChangeThrowablePositionEvent += ChangeThrowablePosition;
-            _slingshotSpringInput
-                .InitiateReleaseLogicEvent += InitiateReleaseLogic;
-        }
+		private float _stretchDistanceThrowable = 0.0f;
+		private Vector3 _forceDirectionThrowable = Vector3.forward;
+		private Rigidbody _rigidBodyThrowable = null;
 
-        void OnDisable()
-        {
-            _slingshotSpringInput
-                .ChangeThrowablePositionEvent -= ChangeThrowablePosition;
-            _slingshotSpringInput
-                .InitiateReleaseLogicEvent -= InitiateReleaseLogic;
-        }
+		void Start()
+		{
+			_shotPointActualInitPosition = _shotPointActual.position;
 
-        private void ChangeThrowablePosition(Vector3 position)
-        {
-           _shotPointActual.position = position;
-        }
+			_trajectoryPrediction = GetComponent<TrajectoryPrediction>();
+		}
 
-        private void InitiateReleaseLogic()
-        {
-            ReleaseCurrentThrowable();
+		void OnEnable()
+		{
+			_slingshotSpringInput
+				.ChangeThrowablePositionEvent += ChangeThrowablePosition;
+			_slingshotSpringInput
+				.RecalculateTrajectoryPredictionEvent += RecalculateTrajectoryPrediction;
+			_slingshotSpringInput
+				.InitiateReleaseLogicEvent += InitiateReleaseLogic;
+		}
 
-            // separate calls, but together for now
+		void OnDisable()
+		{
+			_slingshotSpringInput
+				.ChangeThrowablePositionEvent -= ChangeThrowablePosition;
+			_slingshotSpringInput
+				.RecalculateTrajectoryPredictionEvent -= RecalculateTrajectoryPrediction;
+			_slingshotSpringInput
+				.InitiateReleaseLogicEvent -= InitiateReleaseLogic;
+		}
 
-            _throwableContainerScript.SetupNewThrowableToShoot();
+		private void ChangeThrowablePosition(Vector3 position)
+		{
+		   _shotPointActual.position = position;
+		}
 
-            RestoreShotPointActualInitPosition();
-        }
+		private void RecalculateTrajectoryPrediction()
+		{
+			if (_rigidBodyThrowable == null)
+			{
+				if (_throwableContainerScript.CurrentThrowable == null)
+				{
+					return;
+				}
+				else
+				{
+					_rigidBodyThrowable = GetThrowableRigidBody();
+				}
+			}
 
-        private void ReleaseCurrentThrowable()
-        {
-            Rigidbody rigidbody = ActivatePhysicsOnThrowable();
+			_stretchDistanceThrowable = CalculateDistanceToShotReference();
+			_forceDirectionThrowable = CalculateAppliedForceDirection();
+			float appliedForce = 
+				_stretchDistanceThrowable * 
+				_tensionForcePerDistanceUnit;
 
-            float stretchDistance = CalculateDistanceToShotReference();
-            Vector3 forceDirection = CalculateAppliedForceDirection();
+			ShotData shotData = 
+				new ShotData(
+					_rigidBodyThrowable.mass, 
+					_rigidBodyThrowable.drag, 
+					_shotPointActual.position, 
+					_forceDirectionThrowable, 
+					appliedForce
+				);
+			_trajectoryPrediction.CreateShotTrajectory(shotData);
+		}
 
-            _throwableContainerScript.FreeThrowable();
-            ApplyImpulseToThrowable(rigidbody, forceDirection, stretchDistance);
-            _throwableContainerScript.ForgetThrowable();
-        }
+		private Rigidbody GetThrowableRigidBody()
+		{
+			return 
+				_throwableContainerScript
+				.CurrentThrowable
+				.GetComponent<Rigidbody>();
+		}
 
-        private Rigidbody ActivatePhysicsOnThrowable()
-        {
-            SphereCollider sc = 
-                _throwableContainerScript
-                .CurrentThrowable
-                .GetComponent<SphereCollider>() ;
-            sc.enabled = true;
+		private float CalculateDistanceToShotReference()
+		{
+			float distance = 
+				Vector3.Distance(
+					_shotPointReference.position,
+					_shotPointActual.position
+				);
 
-            Rigidbody rb = 
-                _throwableContainerScript
-                .CurrentThrowable
-                .GetComponent<Rigidbody>();
-            rb.isKinematic = false;
+			return distance;
+		}
 
-            return rb;
-        }
+		private Vector3 CalculateAppliedForceDirection()
+		{
+			Vector3 direction =
+				(_shotPointReference.position - _shotPointActual.position)
+				.normalized;
 
-        private float CalculateDistanceToShotReference()
-        {
-            float distance = 
-                Vector3.Distance(
-                    _shotPointReference.position,
-                    _shotPointActual.position
-                );
+			return direction;
+		}
 
-            // Debug.Log("Distance: " + distance);
+		private void InitiateReleaseLogic()
+		{
+			ReleaseCurrentThrowable();
 
-            return distance;
-        }
+			RestoreShotPointActualInitPosition();
 
-        private Vector3 CalculateAppliedForceDirection()
-        {
-            Vector3 direction =
-                (_shotPointReference.position - _shotPointActual.position)
-                .normalized;
+			// separate calls, but together for now
 
-            return direction;
-        }
+			_throwableContainerScript.SetupNewThrowableToShoot();
+		}
 
-        private void ApplyImpulseToThrowable(
-            Rigidbody rigidbody,
-            Vector3 forceDirection,
-            float stretchDistance)
-        {
-            rigidbody.AddForce(
-                _tensionForcePerDistanceUnit * stretchDistance *
-                forceDirection,
-                ForceMode.Impulse);
-        }
+		private void ReleaseCurrentThrowable()
+		{
+			ActivatePhysicsOnThrowable();
 
-        private void RestoreShotPointActualInitPosition()
-        {
-            _shotPointActual.position = _shotPointActualInitPosition;
-        }
-    }
+			_throwableContainerScript.FreeThrowable();
+
+			ApplyImpulseToThrowable(
+				_rigidBodyThrowable, 
+				_forceDirectionThrowable, 
+				_stretchDistanceThrowable);
+
+			_throwableContainerScript.ForgetThrowable();
+
+			_trajectoryPrediction.HideUnusedDotsStartingFrom(-1);
+			_trajectoryPrediction.HideHitMark();
+			ForgetThrowableRigidbody();
+		}
+
+		private void ActivatePhysicsOnThrowable()
+		{
+			SphereCollider sc = 
+				_throwableContainerScript
+				.CurrentThrowable
+				.GetComponent<SphereCollider>() ;
+			sc.enabled = true;
+
+			Rigidbody rb = GetThrowableRigidBody();
+			rb.isKinematic = false;
+		}
+
+		private void ApplyImpulseToThrowable(
+			Rigidbody rigidbody,
+			Vector3 forceDirection,
+			float stretchDistance)
+		{
+			rigidbody.AddForce(
+				_tensionForcePerDistanceUnit * stretchDistance *
+				forceDirection,
+				ForceMode.Impulse);
+		}
+
+		private void ForgetThrowableRigidbody()
+		{
+			_rigidBodyThrowable = null;
+		}
+
+		private void RestoreShotPointActualInitPosition()
+		{
+			_shotPointActual.position = _shotPointActualInitPosition;
+		}
+	}
 }
