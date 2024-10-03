@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8816773968363676527}
   - component: {fileID: 6255549731238604838}
   - component: {fileID: -2720734360731045969}
+  - component: {fileID: 8523347020101129982}
   m_Layer: 0
   m_Name: Stick
   m_TagString: Untagged
@@ -133,3 +134,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8523347020101129982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7223191379673432570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d25bf5507e5ad3081b0351ce6baf3d89, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pointsForDestroyment: 100
+  _initialHealth: 50
+  _damagePerImpulseUnit: 3
+  _impulseMagnitudeThreshold: 5

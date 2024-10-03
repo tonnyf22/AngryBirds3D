@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8300212449639443657}
   - component: {fileID: 4704692707477115682}
   - component: {fileID: -1839150786640748069}
+  - component: {fileID: 7739968256494817328}
   m_Layer: 0
   m_Name: Pig
   m_TagString: Untagged
@@ -133,3 +134,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &7739968256494817328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4323913150707421119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81aebd6bfd25776ce9c51f05c28f6d36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pointsForDestroyment: 500
+  _initialHealth: 100
+  _damagePerImpulseUnit: 3
+  _impulseMagnitudeThreshold: 20
