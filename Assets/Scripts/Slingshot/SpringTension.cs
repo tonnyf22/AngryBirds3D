@@ -61,7 +61,7 @@ namespace AngryBirds3D.Slingshot
 
         private void ReleaseCurrentThrowable()
         {
-            Rigidbody rigidbody = SetUpPhysicsForThrowable();
+            Rigidbody rigidbody = ActivatePhysicsOnThrowable();
 
             float stretchDistance = CalculateDistanceToShotReference();
             Vector3 forceDirection = CalculateAppliedForceDirection();
@@ -71,15 +71,19 @@ namespace AngryBirds3D.Slingshot
             _throwableContainerScript.ForgetThrowable();
         }
 
-        private Rigidbody SetUpPhysicsForThrowable()
+        private Rigidbody ActivatePhysicsOnThrowable()
         {
-            _throwableContainerScript.CurrentThrowable.AddComponent<SphereCollider>();
+            SphereCollider sc = 
+                _throwableContainerScript
+                .CurrentThrowable
+                .GetComponent<SphereCollider>() ;
+            sc.enabled = true;
 
-            // get this data from the actual throwable
-            Rigidbody rb = _throwableContainerScript.CurrentThrowable.AddComponent<Rigidbody>();
-            rb.mass = 6;
-            rb.angularDrag = 3;
-            rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+            Rigidbody rb = 
+                _throwableContainerScript
+                .CurrentThrowable
+                .GetComponent<Rigidbody>();
+            rb.isKinematic = false;
 
             return rb;
         }
