@@ -627,75 +627,6 @@ MonoBehaviour:
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
---- !u!1 &378184518
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 378184519}
-  - component: {fileID: 378184521}
-  - component: {fileID: 378184520}
-  m_Layer: 0
-  m_Name: Slingshot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &378184519
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378184518}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1256436452}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &378184520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378184518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27e6e3133a81147cfac1a0db8190a9c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _trajectoryDotSetDeltaTime: 0.1
-  _trajectoryDotPrefab: {fileID: 7648577684494039011, guid: 669b484fe12952f18a4a6e735ccdd6f9,
-    type: 3}
-  _collisionCheckExtraPercent: 0.1
-  _hitMarkPrefab: {fileID: 5660420370914206132, guid: 490a550f5792a965e85d02a236a5dcd2,
-    type: 3}
---- !u!114 &378184521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 378184518}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1aae51a5f2001ae83a8a00e91f953fb1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TrajectoryPrediction: {fileID: 378184520}
-  ThrowableMass: 4
-  ThrowableDrag: 0
-  ThrowableTransform: {fileID: 1013084391}
-  ShotTransform: {fileID: 675321928}
-  ShotForce: 50
 --- !u!1 &400565121
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,6 +819,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 583762770}
+  - component: {fileID: 583762771}
   m_Layer: 0
   m_Name: Pigs
   m_TagString: Untagged
@@ -916,6 +848,18 @@ Transform:
   - {fileID: 1860911663}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -89.957, z: 0}
+--- !u!114 &583762771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 583762769}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf3f8c9f9524e9bf4b489c1d2c9f14e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &598371628
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1127,37 +1071,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!1 &675321927
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 675321928}
-  m_Layer: 0
-  m_Name: Force
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &675321928
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 675321927}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0.2587152, y: -0, z: -0, w: 0.9659537}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1256436452}
-  m_LocalEulerAnglesHint: {x: -29.988, y: 0, z: 0}
 --- !u!1 &676390212
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,7 +1336,6 @@ Transform:
   - {fileID: 992830742}
   - {fileID: 34775765}
   - {fileID: 2018262433}
-  - {fileID: 1256436452}
   m_Father: {fileID: 739493570}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &838458947
@@ -1589,37 +1501,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992830741}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1013084390
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1013084391}
-  m_Layer: 0
-  m_Name: Throwable
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1013084391
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1013084390}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1256436452}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1076483847
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1733,6 +1614,7 @@ GameObject:
   - component: {fileID: 1092026810}
   - component: {fileID: 1092026813}
   - component: {fileID: 1092026814}
+  - component: {fileID: 1092026815}
   m_Layer: 10
   m_Name: TensionPlane
   m_TagString: SlingshotTouchPanel
@@ -1839,8 +1721,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8fee2b3e664870efae44a4433f8bad7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _throwableContainerScript: {fileID: 1215113534}
-  _slingshotSpringInput: {fileID: 1602907547}
+  _slingshotSpringInput: {fileID: 1092026815}
+  _trajectoryPrediction: {fileID: 1092026814}
+  _throwableContainer: {fileID: 1215113534}
   _shotPointActual: {fileID: 1215113533}
   _shotPointReference: {fileID: 414144226}
   _tensionForcePerDistanceUnit: 50
@@ -1856,12 +1739,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e6e3133a81147cfac1a0db8190a9c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _trajectoryDotSetDeltaTime: 0.1
+  _trajectoryDotSetDeltaTime: 0.05
   _trajectoryDotPrefab: {fileID: 7648577684494039011, guid: 669b484fe12952f18a4a6e735ccdd6f9,
     type: 3}
   _collisionCheckExtraPercent: 0.1
   _hitMarkPrefab: {fileID: 5660420370914206132, guid: 490a550f5792a965e85d02a236a5dcd2,
     type: 3}
+--- !u!114 &1092026815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1092026808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4779b37c17dcfa62b9e61e6859b10d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _touchInputAction:
+    m_Name: Touch Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f4146bc4-70f8-4ee6-825d-97164f6e216a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: fda706c1-551f-4b3f-9edc-338cbfa48a45
+      m_Path: <Touchscreen>/primaryTouch/position
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Touch Input
+      m_Flags: 0
+    m_Flags: 0
+  _touchPlaneLayer:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &1095990120
 GameObject:
   m_ObjectHideFlags: 0
@@ -1972,7 +1887,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acedc786819b2c7cebbabf9dec8563db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _throwablesBag: {fileID: 1839144816}
+  _birdsTrack: {fileID: 1839144818}
   CurrentThrowable: {fileID: 0}
 --- !u!1 &1227964374
 GameObject:
@@ -2079,40 +1994,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1240175170}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1256436451
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1256436452}
-  m_Layer: 0
-  m_Name: ShotTestBasis
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &1256436452
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1256436451}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.75, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1013084391}
-  - {fileID: 675321928}
-  - {fileID: 378184519}
-  m_Father: {fileID: 822215395}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1262990405
 GameObject:
   m_ObjectHideFlags: 0
@@ -2611,70 +2492,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1556714851}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1602907545
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1602907546}
-  - component: {fileID: 1602907547}
-  m_Layer: 0
-  m_Name: UserInput
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1602907546
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1602907545}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1602907547
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1602907545}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4779b37c17dcfa62b9e61e6859b10d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _touchInputAction:
-    m_Name: Touch Input
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: c939d246-ab8e-476c-9180-6a9dc2652009
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: 3aa14778-a1fa-4658-9cf9-7d53eb4ebff9
-      m_Path: <Touchscreen>/position
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Touch Input
-      m_Flags: 0
-    m_Flags: 0
-  _touchPlaneLayer:
-    serializedVersion: 2
-    m_Bits: 1024
 --- !u!1 &1692122273
 GameObject:
   m_ObjectHideFlags: 0
@@ -2963,6 +2780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1839144817}
+  - component: {fileID: 1839144818}
   m_Layer: 0
   m_Name: Birds
   m_TagString: Untagged
@@ -2988,6 +2806,18 @@ Transform:
   - {fileID: 598371629}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -89.957, z: 0}
+--- !u!114 &1839144818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839144816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d6e48ca5d923168925b273a3148d09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1851683663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4284,5 +4114,4 @@ SceneRoots:
   - {fileID: 1209633985}
   - {fileID: 56892967}
   - {fileID: 1746194835}
-  - {fileID: 1602907546}
   - {fileID: 1795914412}
