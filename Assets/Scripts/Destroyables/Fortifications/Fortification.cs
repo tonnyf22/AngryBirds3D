@@ -1,6 +1,6 @@
 using System;
 
-namespace AngryBirds3D.Destroyables
+namespace AngryBirds3D.Destroyables.Fortifications
 {
     public class Fortification : Destroyable
     {
