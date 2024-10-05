@@ -109,7 +109,7 @@ namespace AngryBirds3D.Slingshot
 				}
 			}
 
-			HideUnusedDotsStartingFrom(lastUsedDotIndex);
+			HideUnusedDotsStartingAfter(lastUsedDotIndex);
 			if (!isCollisionDetected)
 			{
 				HideHitMark();
@@ -170,7 +170,7 @@ namespace AngryBirds3D.Slingshot
 			_hitMark.SetActive(true);
 		}
 
-        public void HideUnusedDotsStartingFrom(int lastUsedDotIndex)
+        public void HideUnusedDotsStartingAfter(int lastUsedDotIndex)
         {
 			bool isLastDotActive = true;
 			for (

@@ -7,14 +7,16 @@ namespace AngryBirds3D.Slingshot
 	public class SpringTension : MonoBehaviour
 	{
 		[SerializeField]
-		private ThrowableContainer _throwableContainerScript;
-
-		[SerializeField]
 		private SlingshotSpringInput _slingshotSpringInput;
 
 		[SerializeField]
+		private TrajectoryPrediction _trajectoryPrediction;
+
+		[SerializeField]
+		private ThrowableContainer _throwableContainer;
+
+		[SerializeField]
 		private Transform _shotPointActual;
-		private Vector3 _shotPointActualInitPosition;
 		[SerializeField]
 		private Transform _shotPointReference;
 
@@ -22,18 +24,9 @@ namespace AngryBirds3D.Slingshot
 		[Range(30.0f, 100.0f)]
 		private float _tensionForcePerDistanceUnit;
 
-		private TrajectoryPrediction _trajectoryPrediction;
-
 		private float _stretchDistanceThrowable = 0.0f;
 		private Vector3 _forceDirectionThrowable = Vector3.forward;
 		private Rigidbody _rigidBodyThrowable = null;
-
-		void Start()
-		{
-			_shotPointActualInitPosition = _shotPointActual.position;
-
-			_trajectoryPrediction = GetComponent<TrajectoryPrediction>();
-		}
 
 		void OnEnable()
 		{
@@ -64,21 +57,12 @@ namespace AngryBirds3D.Slingshot
 		{
 			if (_rigidBodyThrowable == null)
 			{
-				if (_throwableContainerScript.CurrentThrowable == null)
-				{
-					return;
-				}
-				else
-				{
-					_rigidBodyThrowable = GetThrowableRigidBody();
-				}
+                _rigidBodyThrowable = GetThrowableRigidBody();
 			}
 
 			_stretchDistanceThrowable = CalculateDistanceToShotReference();
 			_forceDirectionThrowable = CalculateAppliedForceDirection();
-			float appliedForce = 
-				_stretchDistanceThrowable * 
-				_tensionForcePerDistanceUnit;
+			float appliedForce = CalculateAppliedForce();
 
 			ShotData shotData = 
 				new ShotData(
@@ -94,7 +78,7 @@ namespace AngryBirds3D.Slingshot
 		private Rigidbody GetThrowableRigidBody()
 		{
 			return 
-				_throwableContainerScript
+				_throwableContainer
 				.CurrentThrowable
 				.GetComponent<Rigidbody>();
 		}
@@ -119,39 +103,45 @@ namespace AngryBirds3D.Slingshot
 			return direction;
 		}
 
+		private float CalculateAppliedForce()
+		{
+			return 
+				_stretchDistanceThrowable * 
+				_tensionForcePerDistanceUnit;
+		}
+
 		private void InitiateReleaseLogic()
 		{
-			ReleaseCurrentThrowable();
+			ReleaseCurrentThrowableAndAddImpulse();
 
-			RestoreShotPointActualInitPosition();
+			FreeAndForgetThrowable();
+
+			CleanUpAfterShot();
 
 			// separate calls, but together for now
 
-			_throwableContainerScript.SetupNewThrowableToShoot();
+			_throwableContainer.SetupNewThrowableToShoot();
 		}
 
-		private void ReleaseCurrentThrowable()
+		private void FreeAndForgetThrowable()
+		{
+			_throwableContainer.FreeThrowable();
+			_throwableContainer.ForgetThrowable();
+		}
+
+		private void ReleaseCurrentThrowableAndAddImpulse()
 		{
 			ActivatePhysicsOnThrowable();
-
-			_throwableContainerScript.FreeThrowable();
-
 			ApplyImpulseToThrowable(
 				_rigidBodyThrowable, 
 				_forceDirectionThrowable, 
 				_stretchDistanceThrowable);
-
-			_throwableContainerScript.ForgetThrowable();
-
-			_trajectoryPrediction.HideUnusedDotsStartingFrom(-1);
-			_trajectoryPrediction.HideHitMark();
-			ForgetThrowableRigidbody();
 		}
 
 		private void ActivatePhysicsOnThrowable()
 		{
 			SphereCollider sc = 
-				_throwableContainerScript
+				_throwableContainer
 				.CurrentThrowable
 				.GetComponent<SphereCollider>() ;
 			sc.enabled = true;
@@ -171,6 +161,14 @@ namespace AngryBirds3D.Slingshot
 				ForceMode.Impulse);
 		}
 
+		private void CleanUpAfterShot()
+		{
+			_trajectoryPrediction.HideUnusedDotsStartingAfter(-1);
+			_trajectoryPrediction.HideHitMark();
+			ForgetThrowableRigidbody();
+			RestoreShotPointActualInitPosition();
+		}
+
 		private void ForgetThrowableRigidbody()
 		{
 			_rigidBodyThrowable = null;
@@ -178,7 +176,7 @@ namespace AngryBirds3D.Slingshot
 
 		private void RestoreShotPointActualInitPosition()
 		{
-			_shotPointActual.position = _shotPointActualInitPosition;
+			_shotPointActual.position = _shotPointReference.position;
 		}
 	}
 }

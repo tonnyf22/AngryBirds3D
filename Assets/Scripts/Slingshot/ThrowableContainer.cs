@@ -1,3 +1,4 @@
+using AngryBirds3D.Throwables.Birds;
 using UnityEngine;
 
 namespace AngryBirds3D.Slingshot
@@ -5,7 +6,7 @@ namespace AngryBirds3D.Slingshot
     public class ThrowableContainer : MonoBehaviour
     {
         [SerializeField]
-        private GameObject _throwablesBag;
+        private BirdsTrack _birdsTrack;
 
         [HideInInspector]
         public GameObject CurrentThrowable = null;
@@ -17,15 +18,15 @@ namespace AngryBirds3D.Slingshot
 
         public void SetupNewThrowableToShoot()
         {
-            if (_throwablesBag.transform.childCount > 0)
-            {
-                CurrentThrowable =
-                    _throwablesBag.transform.GetChild(0).gameObject;
-                CurrentThrowable.transform.position = 
-                    transform.position;
+            CurrentThrowable = _birdsTrack.GetNextBird();
 
-                CurrentThrowable.transform.parent = transform;
-            }
+            ZeroCurrentThrowableForShotPointActual();
+        }
+
+        private void ZeroCurrentThrowableForShotPointActual()
+        {
+            CurrentThrowable.transform.position = transform.position;
+            CurrentThrowable.transform.parent = transform;
         }
 
         public void FreeThrowable()

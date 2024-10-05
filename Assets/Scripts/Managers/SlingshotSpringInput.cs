@@ -10,6 +10,7 @@ namespace AngryBirds3D.Managers
     {
         public event Action<Vector3> ChangeThrowablePositionEvent;
         public event Action RecalculateTrajectoryPredictionEvent;
+
         public event Action InitiateReleaseLogicEvent;
 
         [SerializeField]
@@ -25,9 +26,6 @@ namespace AngryBirds3D.Managers
         private Ray _ray;
         private RaycastHit _hit;
 
-        // touch event
-        private event Action ServeTouchInputEvent;
-
         void OnEnable()
         {
             _touchInputAction.Enable();
@@ -41,14 +39,11 @@ namespace AngryBirds3D.Managers
         void Start()
         {
             _camera = Camera.main;
-
-            // stop serving when there are no throwable remain
-            ServeTouchInputEvent += ServeTouchInput;
         }
 
         void Update()
         {
-            ServeTouchInputEvent?.Invoke();
+            ServeTouchInput();
         }
 
         private void ServeTouchInput()
@@ -89,8 +84,6 @@ namespace AngryBirds3D.Managers
                 if (touch.phase == TouchPhase.Ended)
                 {
                     InitiateReleaseLogicEvent?.Invoke();
-
-                    // ServeTouchInputEvent -= ServeTouchInput;
                 }
             }
         }
