@@ -11,11 +11,6 @@ namespace AngryBirds3D.Slingshot
         [HideInInspector]
         public GameObject CurrentThrowable = null;
         
-        void Start()
-        {
-            SetupNewThrowableToShoot();
-        }
-
         public void SetupNewThrowableToShoot()
         {
             CurrentThrowable = _birdsTrack.GetNextBird();

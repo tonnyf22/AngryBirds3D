@@ -117,10 +117,6 @@ namespace AngryBirds3D.Slingshot
 			FreeAndForgetThrowable();
 
 			CleanUpAfterShot();
-
-			// separate calls, but together for now
-
-			_throwableContainer.SetupNewThrowableToShoot();
 		}
 
 		private void FreeAndForgetThrowable()
