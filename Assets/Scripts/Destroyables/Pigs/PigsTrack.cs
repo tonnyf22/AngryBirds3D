@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,8 @@ namespace AngryBirds3D.Destroyables.Pigs
 	public class PigsTrack : MonoBehaviour
 	{
 		private List<GameObject> _pigs = new List<GameObject>();
+
+		public event Action AllPigsDefeatedEvent;
 
 		void Awake()
 		{
@@ -40,6 +43,12 @@ namespace AngryBirds3D.Destroyables.Pigs
 		private void PigDefeated(GameObject pig)
 		{
 			_pigs.Remove(pig);
+
+			// What is that? You really need this mess here ???
+			if (PigsCount() == 0)
+			{
+				AllPigsDefeatedEvent?.Invoke();
+			}
 		}
 
 		public bool IsHavePigs()
@@ -47,7 +56,7 @@ namespace AngryBirds3D.Destroyables.Pigs
 			return _pigs.Count > 0;
 		}
 
-		public int GetPigsCount()
+		public int PigsCount()
 		{
 			return _pigs.Count;
 		}
