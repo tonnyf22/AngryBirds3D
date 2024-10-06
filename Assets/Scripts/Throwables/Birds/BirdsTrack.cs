@@ -33,6 +33,11 @@ namespace AngryBirds3D.Throwables.Birds
             return _birds.Count > 0;
         }
 
+        public int BirdsCount()
+        {
+            return _birds.Count;
+        }
+
         public GameObject GetNextBird()
         {
             if (IsHaveBirds())
