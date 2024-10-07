@@ -5,7 +5,7 @@ namespace AngryBirds3D.Birds.Abilities
     public class Speed : BirdAbility
     {
         [SerializeField]
-        // set clever [Range(0.0f, 1.0f)]
+        [Range(1.0f, 100.0f)]
         private float _speedToAddImmediately;
 
         private Rigidbody _rb;
@@ -18,7 +18,7 @@ namespace AngryBirds3D.Birds.Abilities
         protected override void AbilityActivated()
         {
             _rb.AddForce(
-                transform.forward * _speedToAddImmediately,
+                _rb.mass * _speedToAddImmediately * transform.forward,
                 ForceMode.Impulse);
         }
     }
