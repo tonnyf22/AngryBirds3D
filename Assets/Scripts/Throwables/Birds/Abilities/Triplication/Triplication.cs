@@ -1,6 +1,7 @@
+using AngryBirds3D.Throwables;
 using UnityEngine;
 
-namespace AngryBirds3D.Birds.Abilities
+namespace AngryBirds3D.Birds.Abilities.Triplication
 {
 	[RequireComponent(typeof(SphereCollider))]
 	public class Triplication : BirdAbility
@@ -22,26 +23,25 @@ namespace AngryBirds3D.Birds.Abilities
 		
 		private Vector3 
 			_randomlyRotatedUpVector, 
-			_randomplyRotatedRightVector;
+			_randomlyRotatedRightVector;
 
 		void Start()
 		{
 			_rb = GetComponent<Rigidbody>();
 			_sc = GetComponent<SphereCollider>();
-
-			_currentVelocity = _rb.velocity.magnitude;
 		}
 
 		protected override void AbilityActivated()
 		{
+			_currentVelocity = _rb.velocity.magnitude;
+
 			CalculatePositionsAndDirections();
 			InstantiateAdditionalBirdsAndApplyImpulseForce();
 		}
 
 		private void CalculatePositionsAndDirections()
 		{
-			CalculatePositionsAndDirections();
-			(_randomlyRotatedUpVector, _randomplyRotatedRightVector) =
+			(_randomlyRotatedUpVector, _randomlyRotatedRightVector) =
 				GenerateRandomlyRotatedUpAndRightVector();
 
 			(_birdOnePosition, _birdTwoPosition) =
@@ -70,17 +70,23 @@ namespace AngryBirds3D.Birds.Abilities
 
 		private (Vector3, Vector3) GenerateAdditionalBirdsPositions()
 		{
-			// gradually get modification 'till the final position
 			Vector3 additionalBirdOnePosition;
+			Vector3 additionalBirdTwoPosition;
 
-			additionalBirdOnePosition = 
+			float ratio = 
+				_sc.radius * 
+				transform.localScale.x * 
+				2.5f;
+			Vector3 scaled = 
 				ScaleVectorByRatio(
 					_randomlyRotatedUpVector, 
-					_sc.radius * 1.5f);
+					ratio);
 			additionalBirdOnePosition =
-				ShiftOfCurrentPositionBy(additionalBirdOnePosition);
+				ShiftOfCurrentPositionBy(scaled);
+			additionalBirdTwoPosition =
+				ShiftOfCurrentPositionBy(-scaled);
 
-			return (additionalBirdOnePosition, -additionalBirdOnePosition);
+			return (additionalBirdOnePosition, additionalBirdTwoPosition);
 		}
 
 		private Vector3 ScaleVectorByRatio(Vector3 vector, float ratio)
@@ -97,13 +103,13 @@ namespace AngryBirds3D.Birds.Abilities
 		{
 			Vector3 birdOneDirection =
 				Quaternion.AngleAxis(
-					_angleDeviation, 
-					_randomplyRotatedRightVector) * 
+					-_angleDeviation, 
+					_randomlyRotatedRightVector) * 
 				transform.forward;
 			Vector3 birdTwoDirection =
 				Quaternion.AngleAxis(
-					-_angleDeviation, 
-					_randomplyRotatedRightVector) * 
+					_angleDeviation, 
+					_randomlyRotatedRightVector) * 
 				transform.forward;
 
 			return (birdOneDirection, birdTwoDirection);
@@ -121,6 +127,7 @@ namespace AngryBirds3D.Birds.Abilities
 			bird1RB.AddForce(
 				bird1RB.mass * _currentVelocity * _birdOneDirection,
 				ForceMode.Impulse);
+			bird1RB.GetComponent<ForwardLookManager>().enabled = true;
 
 			GameObject bird2 = 
 				Instantiate(
@@ -132,6 +139,7 @@ namespace AngryBirds3D.Birds.Abilities
 			bird2RB.AddForce(
 				bird2RB.mass * _currentVelocity * _birdTwoDirection,
 				ForceMode.Impulse);
+			bird2RB.GetComponent<ForwardLookManager>().enabled = true;
 		}
 	}
 }
