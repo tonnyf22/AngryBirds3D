@@ -21,14 +21,14 @@ namespace AngryBirds3D.Destroyables.Pigs
 			for (int i = 0; i < parent.transform.childCount; i++)
 			{
 				Transform childTransform = parent.transform.GetChild(i);
-				if (childTransform.childCount > 0)
-				{
-					SeekForLastChildren(childTransform);
-				}
-				else
-				{
+				// if (childTransform.childCount > 0)
+				// {
+				// 	SeekForLastChildren(childTransform);
+				// }
+				// else
+				// {
 					_pigs.Add(childTransform.gameObject);
-				}
+				// }
 			}
 		}
 
