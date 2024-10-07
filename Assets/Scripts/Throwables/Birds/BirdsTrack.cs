@@ -17,14 +17,14 @@ namespace AngryBirds3D.Throwables.Birds
             for (int i = 0; i < parent.transform.childCount; i++)
             {
                 Transform childTransform = parent.transform.GetChild(i);
-                if (childTransform.childCount > 0)
-                {
-                    SeekForLastChildren(childTransform);
-                }
-                else
-                {
+                // if (childTransform.childCount > 0)
+                // {
+                //     SeekForLastChildren(childTransform);
+                // }
+                // else
+                // {
                     _birds.Add(childTransform.gameObject);
-                }
+                // }
             }
         }
 
@@ -42,12 +42,10 @@ namespace AngryBirds3D.Throwables.Birds
         {
             if (IsHaveBirds())
             {
-                int indexOfLast = _birds.Count - 1;
+                GameObject bird = _birds[0];
 
-                GameObject bird = _birds[indexOfLast];
-
-                _birds.RemoveAt(indexOfLast);
-				bird.transform.parent = null;
+                _birds.RemoveAt(0);
+				// bird.transform.parent = null;
 
                 return bird;
             }
