@@ -16,8 +16,8 @@ namespace AngryBirds3D.Level
 
 		void OnEnable()
 		{
-            // enable necessary scripts on objects
-            // don't really need any specific "per-state" functionality
+			// enable necessary scripts on objects
+			// don't really need any specific "per-state" functionality
 
 			SetUpNewThrowable();
 			
@@ -27,6 +27,7 @@ namespace AngryBirds3D.Level
 		private void SetUpNewThrowable()
 		{
 			_throwableContainer.SetupNewThrowableToShoot();
+			Debug.Log(_throwableContainer.CurrentThrowable == null);
 		}
 
 		private void ChangeState()
@@ -36,7 +37,7 @@ namespace AngryBirds3D.Level
 
 		void OnDisable()
 		{
-            // no specific functionality was enabled, so no need to disable anything
+			// no specific functionality was enabled, so no need to disable anything
 		}
 	}
 }
