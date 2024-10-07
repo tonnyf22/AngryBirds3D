@@ -1,5 +1,4 @@
 using System;
-using AngryBirds3D.Managers;
 using UnityEngine;
 
 namespace AngryBirds3D.Slingshot
@@ -31,7 +30,7 @@ namespace AngryBirds3D.Slingshot
 		void OnEnable()
 		{
 			_slingshotSpringInput
-				.ChangeThrowablePositionEvent += ChangeThrowablePosition;
+				.ChangeThrowablePositionAndForwardDirectionEvent += ChangeThrowablePositionAndForwardDirection;
 			_slingshotSpringInput
 				.RecalculateTrajectoryPredictionEvent += RecalculateTrajectoryPrediction;
 			_slingshotSpringInput
@@ -41,16 +40,17 @@ namespace AngryBirds3D.Slingshot
 		void OnDisable()
 		{
 			_slingshotSpringInput
-				.ChangeThrowablePositionEvent -= ChangeThrowablePosition;
+				.ChangeThrowablePositionAndForwardDirectionEvent -= ChangeThrowablePositionAndForwardDirection;
 			_slingshotSpringInput
 				.RecalculateTrajectoryPredictionEvent -= RecalculateTrajectoryPrediction;
 			_slingshotSpringInput
 				.InitiateReleaseLogicEvent -= InitiateReleaseLogic;
 		}
 
-		private void ChangeThrowablePosition(Vector3 position)
+		private void ChangeThrowablePositionAndForwardDirection(Vector3 position)
 		{
-		   _shotPointActual.position = position;
+			_shotPointActual.position = position;
+			_shotPointActual.LookAt(_shotPointReference);
 		}
 
 		private void RecalculateTrajectoryPrediction()
@@ -114,15 +114,15 @@ namespace AngryBirds3D.Slingshot
 		{
 			ReleaseCurrentThrowableAndAddImpulse();
 
-			FreeAndForgetThrowable();
+			FreeThrowable();
 
 			CleanUpAfterShot();
 		}
 
-		private void FreeAndForgetThrowable()
+		private void FreeThrowable()
 		{
 			_throwableContainer.FreeThrowable();
-			_throwableContainer.ForgetThrowable();
+			// _throwableContainer.ForgetThrowable();
 		}
 
 		private void ReleaseCurrentThrowableAndAddImpulse()
@@ -162,7 +162,7 @@ namespace AngryBirds3D.Slingshot
 			_trajectoryPrediction.HideUnusedDotsStartingAfter(-1);
 			_trajectoryPrediction.HideHitMark();
 			ForgetThrowableRigidbody();
-			RestoreShotPointActualInitPosition();
+			RestoreShotPointActual();
 		}
 
 		private void ForgetThrowableRigidbody()
@@ -170,9 +170,10 @@ namespace AngryBirds3D.Slingshot
 			_rigidBodyThrowable = null;
 		}
 
-		private void RestoreShotPointActualInitPosition()
+		private void RestoreShotPointActual()
 		{
 			_shotPointActual.position = _shotPointReference.position;
+			_shotPointActual.forward = Vector3.forward;
 		}
 	}
 }
