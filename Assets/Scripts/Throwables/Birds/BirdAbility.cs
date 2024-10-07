@@ -8,6 +8,11 @@ namespace AngryBirds3D.Birds
         [SerializeField]
         private AbilityInput _abilityInput;
 
+        [SerializeField]
+        private bool _isAllowedActivationAfterHit;
+
+        private bool _isUnsubscribedFromAbilityActivation;
+
         void OnEnable()
         {
             _abilityInput.AbilityActivatedEvent += AbilityActivated;
@@ -15,7 +20,29 @@ namespace AngryBirds3D.Birds
 
         void OnDisable()
         {
-            _abilityInput.AbilityActivatedEvent -= AbilityActivated;
+            if (IsNotAllowedActivationAfterHit())
+            {
+                DisableAbilityActivation();
+            }
+        }
+
+        private bool IsNotAllowedActivationAfterHit()
+        {
+            return !_isAllowedActivationAfterHit;
+        }
+
+        public void DisableAbilityActivation()
+        {
+            if (IsNotUnsubscribedFromAbilityActivation())
+            {
+                _abilityInput.AbilityActivatedEvent -= AbilityActivated;
+                _isUnsubscribedFromAbilityActivation = true;
+            }
+        }
+
+        private bool IsNotUnsubscribedFromAbilityActivation()
+        {
+            return !_isUnsubscribedFromAbilityActivation;
         }
 
         protected abstract void AbilityActivated();
