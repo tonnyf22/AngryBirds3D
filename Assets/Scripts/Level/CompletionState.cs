@@ -7,9 +7,10 @@ namespace AngryBirds3D.Level
         [SerializeField]
         private LevelSM _levelSM;
 
+
         void OnEnable()
         {
-
+            Debug.Log("Results State");
         }
 
         void OnDisable()
