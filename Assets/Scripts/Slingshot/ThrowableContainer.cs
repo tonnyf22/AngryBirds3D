@@ -13,9 +13,16 @@ namespace AngryBirds3D.Slingshot
         
         public void SetupNewThrowableToShoot()
         {
+            ForgetPreviousThrowable();
+
             CurrentThrowable = _birdsTrack.GetNextBird();
 
             ZeroCurrentThrowableForShotPointActual();
+        }
+
+        private void ForgetPreviousThrowable()
+        {
+            CurrentThrowable = null;
         }
 
         private void ZeroCurrentThrowableForShotPointActual()
@@ -27,11 +34,6 @@ namespace AngryBirds3D.Slingshot
         public void FreeThrowable()
         {
             CurrentThrowable.transform.parent = null;
-        }
-
-        public void ForgetThrowable()
-        {
-            CurrentThrowable = null;
         }
     }
 }
