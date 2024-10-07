@@ -1,4 +1,3 @@
-using AngryBirds3D.Managers;
 using AngryBirds3D.Slingshot;
 using UnityEngine;
 
@@ -24,6 +23,12 @@ namespace AngryBirds3D.Level
 			SubscribeToNecessaryEvents();
 		}
 
+		private void EnableNecessaryFunctionality()
+		{
+			_springTension.enabled = true;
+			_slingshotSpringInput.enabled = true;
+		}
+
 		private void SubscribeToNecessaryEvents()
 		{
 			_slingshotSpringInput.InitiateReleaseLogicEvent += ChangeState;
@@ -34,12 +39,6 @@ namespace AngryBirds3D.Level
             _levelSM.ChangeState(this, _birdFlyState);
 		}
 
-		private void EnableNecessaryFunctionality()
-		{
-			_springTension.enabled = true;
-			_slingshotSpringInput.enabled = true;
-		}
-
 		void OnDisable()
 		{
 			DisableUsedFunctionality();
@@ -47,15 +46,15 @@ namespace AngryBirds3D.Level
 			UnsubscribeFromUsedEvents();
 		}
 
-		private void UnsubscribeFromUsedEvents()
-		{
-			_slingshotSpringInput.InitiateReleaseLogicEvent -= ChangeState;
-		}
-
 		private void DisableUsedFunctionality()
 		{
 			_springTension.enabled = false;
 			_slingshotSpringInput.enabled = false;
+		}
+
+		private void UnsubscribeFromUsedEvents()
+		{
+			_slingshotSpringInput.InitiateReleaseLogicEvent -= ChangeState;
 		}
 	}
 }
