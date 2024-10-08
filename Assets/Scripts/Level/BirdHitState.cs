@@ -1,4 +1,5 @@
 using AngryBirds3D.Birds;
+using AngryBirds3D.GameCamera;
 using AngryBirds3D.Slingshot;
 using AngryBirds3D.Throwables;
 using UnityEngine;
@@ -15,6 +16,9 @@ namespace AngryBirds3D.Level
 
         [SerializeField]
         private ThrowableContainer _throwableContainer;
+
+		[SerializeField]
+		private ThrowableTrack _throwableTrack;
 
         private AbilityInput _abilityInput;
         private BirdAbility _birdAbility;
@@ -70,12 +74,19 @@ namespace AngryBirds3D.Level
 
         void OnDisable()
         {
+			ResetCameraPosition();
+
 			DisableBirdAbilityActivation();
 
             DisableUsedFunctionality();
 
             UnsubscribeFromUsedEvents();
         }
+
+		private void ResetCameraPosition()
+		{
+			_throwableTrack.RestoreDefaultTransform();
+		}
 
 		private void DisableBirdAbilityActivation()
 		{

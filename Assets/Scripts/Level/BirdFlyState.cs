@@ -1,4 +1,5 @@
 using AngryBirds3D.Birds;
+using AngryBirds3D.GameCamera;
 using AngryBirds3D.Slingshot;
 using AngryBirds3D.Throwables;
 using UnityEngine;
@@ -13,7 +14,8 @@ namespace AngryBirds3D.Level
 		[SerializeField]
 		private BirdHitState _birdHitState;
 
-		// camera tracking
+		[SerializeField]
+		private ThrowableTrack _throwableTrack;
 
 		[SerializeField]
 		private ThrowableContainer _throwableContainer;
@@ -33,6 +35,8 @@ namespace AngryBirds3D.Level
 
 		private void EnableNecessaryFunctionality()
 		{
+			_throwableTrack.enabled = true;
+
 			SetUpVariables();
 
 			_abilityInput.enabled = true;
@@ -83,6 +87,8 @@ namespace AngryBirds3D.Level
 		// turn of on the exiting from bird hit state
 		private void DisableUsedFunctionality()
 		{
+			_throwableTrack.enabled = false;
+
 		// 	_abilityInput.enabled = false;
 			_birdAbility.enabled = false;
 		// 	_hitManager.enabled = false;
