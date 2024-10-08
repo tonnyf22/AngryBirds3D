@@ -2248,9 +2248,10 @@ GameObject:
   - component: {fileID: 1466662265}
   - component: {fileID: 1466662264}
   - component: {fileID: 1466662263}
-  - component: {fileID: 1466662269}
+  - component: {fileID: 1466662267}
+  - component: {fileID: 1466662268}
   m_Layer: 0
-  m_Name: CameraTestSlingshot
+  m_Name: CameraSlingshot
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2367,26 +2368,50 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466662262}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.043619405, y: 0, z: 0, w: 0.9990483}
-  m_LocalPosition: {x: 3.09, y: 2.395, z: -5.31}
+  m_LocalRotation: {x: 0.029685955, y: -0.0637159, z: 0.0018961607, w: 0.9975247}
+  m_LocalPosition: {x: 3, y: 2.4, z: -5.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
---- !u!114 &1466662269
-MonoBehaviour:
+--- !u!1183024399 &1466662267
+LookAtConstraint:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1466662262}
   m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_Roll: 0
+  m_WorldUpObject: {fileID: 0}
+  m_UseUpObject: 0
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 1543783013}
+    weight: 1
+--- !u!114 &1466662268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1466662262}
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ae1283cbc74abcc3add933e62c03e12, type: 3}
+  m_Script: {fileID: 11500000, guid: a7fd2dfce99e5ce1cabfad053a6c5b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelCenterTransform: {fileID: 1543783013}
+  _throwableContainer: {fileID: 1215113534}
+  _camera: {fileID: 1466662265}
+  _interpolationSpeed: 2
+  _minimumDistanceToThrowable: 1
+  DefaultCameraTransform: {fileID: 1683623128}
 --- !u!1001 &1510913018
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2566,6 +2591,58 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1556714851}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1683623127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1683623128}
+  - component: {fileID: 1683623129}
+  m_Layer: 0
+  m_Name: CameraDefaultPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1683623128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683623127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.029685955, y: -0.0637159, z: 0.0018961607, w: 0.9975247}
+  m_LocalPosition: {x: 3, y: 2.4, z: -5.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 0, z: 0}
+--- !u!1183024399 &1683623129
+LookAtConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1683623127}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Weight: 1
+  m_RotationAtRest: {x: 0, y: 0, z: 0}
+  m_RotationOffset: {x: 0, y: 0, z: 0}
+  m_Roll: 0
+  m_WorldUpObject: {fileID: 0}
+  m_UseUpObject: 0
+  m_Active: 1
+  m_IsLocked: 1
+  m_Sources:
+  - sourceTransform: {fileID: 1543783013}
+    weight: 1
 --- !u!1 &1692122273
 GameObject:
   m_ObjectHideFlags: 0
@@ -3172,6 +3249,7 @@ MonoBehaviour:
   _levelSM: {fileID: 1905295891}
   _passCheckState: {fileID: 1905295890}
   _throwableContainer: {fileID: 1215113534}
+  _throwableTrack: {fileID: 1466662268}
 --- !u!114 &1905295887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3186,6 +3264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelSM: {fileID: 1905295891}
   _birdHitState: {fileID: 1905295886}
+  _throwableTrack: {fileID: 1466662268}
   _throwableContainer: {fileID: 1215113534}
 --- !u!114 &1905295888
 MonoBehaviour:
@@ -4275,6 +4354,7 @@ SceneRoots:
   - {fileID: 603229224}
   - {fileID: 1262990406}
   - {fileID: 1543783013}
+  - {fileID: 1683623128}
   - {fileID: 1466662266}
   - {fileID: 763976638}
   - {fileID: 739493570}
