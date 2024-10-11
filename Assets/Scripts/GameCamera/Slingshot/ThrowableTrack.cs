@@ -1,7 +1,7 @@
 using UnityEngine;
 using AngryBirds3D.Slingshot;
 
-namespace AngryBirds3D.GameCamera
+namespace AngryBirds3D.GameCamera.Slingshot
 {
     public class ThrowableTrack : MonoBehaviour
     {
@@ -9,12 +9,16 @@ namespace AngryBirds3D.GameCamera
         private ThrowableContainer _throwableContainer;
 
         [SerializeField]
-        [Range(1.0f, 10.0f)]
+        [Range(0.0f, 10.0f)]
         [Tooltip("How fast does camera approach the trowable in fly")]
-        private float _interpolationSpeed;
+        private float _positionInterpolationSpeed;
         [SerializeField]
         [Range(1.0f, 10.0f)]
         private float _minimumDistanceToThrowable;
+        // [SerializeField]
+        // [Range(1.0f, 20.0f)]
+        // [Tooltip("How fast does camera turn in the direction of the trowable in fly")]
+        // private float _rotationInterpolationSpeed;
 
         [SerializeField]
         private Transform DefaultCameraTransform;
@@ -25,6 +29,8 @@ namespace AngryBirds3D.GameCamera
             {
                 InterpolatePositionTowardsTheThrowable();
             }
+
+            InterpolateRotationTowardsTheThrowable();
         }
 
         private bool IsPositioNotCloseEnoughToThrowable(Vector3 position)
@@ -55,11 +61,15 @@ namespace AngryBirds3D.GameCamera
 
         private Vector3 CalculatePotentialPositionAfterInterpolation()
         {
+            float interpolatoinRatio = 
+                    _positionInterpolationSpeed * 
+                    Time.deltaTime;
+
             return 
                 Vector3.Slerp(
                     transform.position,
                     _throwableContainer.CurrentThrowable.transform.position,
-                    _interpolationSpeed / 100.0f
+                    interpolatoinRatio
                 );
         }
 
@@ -78,6 +88,42 @@ namespace AngryBirds3D.GameCamera
 
             transform.position = calculatedCameraPosition;
         }
+
+        private void InterpolateRotationTowardsTheThrowable()
+        {
+            // Quaternion fullRotationTowardsThrowable = 
+            //     CalculateFullRotationTowardsThrowable();
+
+            // float interpolatoinRatio = 
+            //         _rotationInterpolationSpeed * 
+            //         Time.deltaTime /
+            //         10.0f;
+
+            transform.rotation = 
+                Quaternion.LookRotation(
+                    _throwableContainer.CurrentThrowable.transform.position - 
+                    transform.position);
+
+            // transform.rotation = 
+            //     Quaternion.Slerp(
+            //         transform.rotation,
+            //         fullRotationTowardsThrowable,
+            //         interpolatoinRatio
+            //     );
+        }
+
+        // private Quaternion CalculateFullRotationTowardsThrowable()
+        // {
+        //     Vector3 toDirection = 
+        //         _throwableContainer.CurrentThrowable.transform.position - 
+        //         transform.position;
+
+        //     return 
+        //         Quaternion.FromToRotation(
+        //             transform.forward,
+        //             toDirection
+        //         );
+        // }
 
         public void RestoreDefaultTransform()
         {
