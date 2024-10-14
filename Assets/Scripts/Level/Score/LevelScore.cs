@@ -11,6 +11,7 @@ namespace AngryBirds3D.Level.Score
 
         public int DefeatedPigsScore;
         public int DestroyedFortificationsScore;
+        public int SavedBirdsScore;
 
         public int StarsScore;
     }
