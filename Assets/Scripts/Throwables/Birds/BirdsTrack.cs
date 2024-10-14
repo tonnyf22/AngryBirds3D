@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using AngryBirds3D.Birds;
 using UnityEngine;
 
 namespace AngryBirds3D.Throwables.Birds
@@ -38,6 +39,14 @@ namespace AngryBirds3D.Throwables.Birds
         public int BirdsCount()
         {
             return _birds.Count;
+        }
+
+        public int GetScoreForSavedBirdByIndex(int index)
+        {
+            return 
+                _birds[index]
+                .GetComponent<BirdAbility>()
+                .PointsForSave;
         }
 
         public GameObject GetNextBird()
