@@ -5,11 +5,11 @@ namespace AngryBirds3D.Destroyables
 {
 	public abstract class Destroyable : MonoBehaviour
 	{
-		public event Action<float> ScoreEvent;
+		public event Action<int> ScoreEvent;
 
 		[SerializeField]
 		[Range(10, 10000)]
-		private float _pointsForDestroyment;
+		private int _pointsForDestroyment;
 
 		[SerializeField]
 		[Range(10, 1000)]
