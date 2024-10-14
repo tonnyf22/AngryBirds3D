@@ -22,6 +22,7 @@ namespace AngryBirds3D.Level.States
             print("defeated pigs score: " + ls.DefeatedPigsScore);
             print("destroyed fortifications score: " + ls.DestroyedFortificationsScore);
             print("stars score: " + ls.StarsScore);
+            print("saved birds score: " + ls.SavedBirdsScore);
 
             // show score on ui (with event or what ??? think about this, ok ...)
 
