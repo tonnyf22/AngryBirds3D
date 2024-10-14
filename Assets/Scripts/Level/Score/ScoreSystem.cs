@@ -1,3 +1,4 @@
+using AngryBirds3D.Birds;
 using AngryBirds3D.Destroyables.Fortifications;
 using AngryBirds3D.Destroyables.Pigs;
 using AngryBirds3D.Throwables.Birds;
@@ -54,7 +55,7 @@ namespace AngryBirds3D.Level.Score
 
         private void CurrentSessionResultsCalculations()
         {
-            // score
+            // score (pigs and fortifications only)
             _currentSessionLevelScore.Score = 
                 _currentSessionLevelScore.DefeatedPigsScore +
                 _currentSessionLevelScore.DestroyedFortificationsScore;
@@ -68,18 +69,29 @@ namespace AngryBirds3D.Level.Score
             }
             else
             {
+                _currentSessionLevelScore.SavedBirdsScore = 
+                    CalculateSavedBirdsScore();
+                _currentSessionLevelScore.Score +=
+                    _currentSessionLevelScore.SavedBirdsScore;
+
                 _currentSessionLevelScore.IsLevelPassed = true;
                 _currentSessionLevelScore.StarsScore = 
                     CalculateStarsScoreOfCurrentSession();
             }
         }
 
-        private void SaveBest()
+        private int CalculateSavedBirdsScore()
         {
-            if (_currentSessionLevelScore.Score > _levelData.LevelScore.Score)
+            int score = 0;
+            for (int i = 0; i < _birdsTrack.BirdsCount(); i++)
             {
-                _levelData.LevelScore = _currentSessionLevelScore;
+                score +=
+                    _birdsTrack
+                    .GetBirdByIndex(i)
+                    .GetComponent<BirdAbility>()
+                    .PointsForSave;
             }
+            return score;
         }
 
         private int CalculateStarsScoreOfCurrentSession()
@@ -109,6 +121,14 @@ namespace AngryBirds3D.Level.Score
             else
             {
                 return 3;
+            }
+        }
+
+        private void SaveBest()
+        {
+            if (_currentSessionLevelScore.Score > _levelData.LevelScore.Score)
+            {
+                _levelData.LevelScore = _currentSessionLevelScore;
             }
         }
 
