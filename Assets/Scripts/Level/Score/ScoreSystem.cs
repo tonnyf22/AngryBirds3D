@@ -87,9 +87,7 @@ namespace AngryBirds3D.Level.Score
             {
                 score +=
                     _birdsTrack
-                    .GetBirdByIndex(i)
-                    .GetComponent<BirdAbility>()
-                    .PointsForSave;
+                    .GetScoreForSavedBirdByIndex(i);
             }
             return score;
         }
