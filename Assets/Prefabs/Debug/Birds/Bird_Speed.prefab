@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c336da07252f988b7be0086f36353c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pointsForSave: 10000
   _abilityInput: {fileID: 4078299375603220225}
   _isAllowedActivationAfterHit: 0
   _speedToAddImmediately: 20

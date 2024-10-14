@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d6facb0440c73cc9cebd949b84600a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pointsForSave: 10000
   _abilityInput: {fileID: 8716915947246492798}
   _isAllowedActivationAfterHit: 0
   birdPrefabPhysicsOnly: {fileID: 7884187146957383795, guid: 9874265587c244524a44a79ee105d7b3,

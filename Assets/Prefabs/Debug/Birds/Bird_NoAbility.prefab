@@ -317,6 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b812c71c8e767669b549b795e1ee251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _pointsForSave: 10000
   _abilityInput: {fileID: 4275905049482178947}
   _isAllowedActivationAfterHit: 0
 --- !u!114 &4275905049482178947
