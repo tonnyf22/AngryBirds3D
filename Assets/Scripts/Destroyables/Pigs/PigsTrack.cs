@@ -9,6 +9,9 @@ namespace AngryBirds3D.Destroyables.Pigs
 		private List<GameObject> _pigs = new List<GameObject>();
 
 		public event Action AllPigsDefeatedEvent;
+		public event Action<int> ScoreEvent;
+
+		public event Action<GameObject> PigDefeatedEvent;
 
 		void Awake()
 		{
@@ -36,19 +39,34 @@ namespace AngryBirds3D.Destroyables.Pigs
 		{
 			foreach (var pig in _pigs)
 			{
-				pig.GetComponent<Pig>().PigDefeatedEvent += PigDefeated;
+				Pig pigLogic = pig.GetComponent<Pig>();
+
+				pigLogic.ScoreEvent += Score;
+				pigLogic.PigDefeatedEvent += PigDefeated;
 			}
 		}
 
 		private void PigDefeated(GameObject pig)
 		{
+			// wow, accidentally got big brain move here:
+			// like every pig's defeat will concentrate on this particular event
+			// like reinvoking it from one class
+			// Is it coolness or stupidity ??? The last one pbly...
+			PigDefeatedEvent?.Invoke(pig);
+
 			_pigs.Remove(pig);
 
 			// What is that? You really need this mess here ???
+			// Yeah, I DO need. I have even subscribed to this event already B)
 			if (PigsCount() == 0)
 			{
 				AllPigsDefeatedEvent?.Invoke();
 			}
+		}
+
+		private void Score(int score)
+		{
+			ScoreEvent?.Invoke(score);
 		}
 
 		public bool IsHavePigs()
