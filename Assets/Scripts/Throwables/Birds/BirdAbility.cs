@@ -1,3 +1,4 @@
+using System;
 using AngryBirds3D.Throwables;
 using UnityEngine;
 
@@ -5,6 +6,14 @@ namespace AngryBirds3D.Birds
 {
     public abstract class BirdAbility : MonoBehaviour
     {
+        [SerializeField]
+        [Range(1, 50000)]
+        private int _pointsForSave;
+        public int PointsForSave
+        {
+            get { return _pointsForSave; }
+        }
+
         [SerializeField]
         private AbilityInput _abilityInput;
 
