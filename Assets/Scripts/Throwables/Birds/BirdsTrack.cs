@@ -7,6 +7,8 @@ namespace AngryBirds3D.Throwables.Birds
     {
         private List<GameObject> _birds = new List<GameObject>();
 
+        private GameObject _lastExtractedBird;
+
         void Awake()
         {
             SeekForLastChildren(transform);
@@ -44,8 +46,7 @@ namespace AngryBirds3D.Throwables.Birds
             {
                 GameObject bird = _birds[0];
 
-                _birds.RemoveAt(0);
-				// bird.transform.parent = null;
+                RememberLastExtractedBird(bird);
 
                 return bird;
             }
@@ -53,6 +54,16 @@ namespace AngryBirds3D.Throwables.Birds
             {
                 throw new NoBirdsException();
             }
+        }
+
+        private void RememberLastExtractedBird(GameObject bird)
+        {
+            _lastExtractedBird = bird;
+        }
+
+        public void ForgetLastExtractedBird()
+        {
+            _birds.Remove(_lastExtractedBird);
         }
     }
 }
