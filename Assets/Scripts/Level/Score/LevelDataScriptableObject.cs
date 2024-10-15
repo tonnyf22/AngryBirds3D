@@ -9,6 +9,8 @@ namespace AngryBirds3D.Level.Score
         order = 1)]
     public class LevelDataScriptableObject : ScriptableObject
     {
+        public string LevelNumber;
+
         public LevelScore LevelScore;
 
         public StarsByScore StarsByScore;
