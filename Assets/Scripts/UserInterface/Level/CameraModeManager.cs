@@ -2,7 +2,7 @@ using UnityEngine;
 using AngryBirds3D.Slingshot;
 using AngryBirds3D.GameCamera.FreeMode;
 
-namespace AngryBirds3D.UserInterface
+namespace AngryBirds3D.UserInterface.Level
 {
     public class CameraModeManager : MonoBehaviour
     {
