@@ -12,18 +12,18 @@ namespace AngryBirds3D.UserInterface.Menu
         private LevelDataScriptableObject _levelData;
 
         [SerializeField]
-        private TextMeshProUGUI _NumberText;
+        private TextMeshProUGUI _numberText;
 
         [SerializeField]
-        private TextMeshProUGUI _ScoreText;
+        private TextMeshProUGUI _scoreText;
 
         [SerializeField]
         GameObject[] _starsObjects = new GameObject[3];
 
         void Start()
         {
-            _NumberText.text = _levelData.LevelNumber;
-            _ScoreText.text = _levelData.LevelScore.Score.ToString();
+            _numberText.text = _levelData.LevelNumber;
+            _scoreText.text = _levelData.LevelScore.Score.ToString();
 
             for (int i = 0; i < _levelData.LevelScore.StarsScore; i++)
             {
