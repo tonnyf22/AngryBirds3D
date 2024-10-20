@@ -8,7 +8,7 @@ namespace AngryBirds3D.UserInterface.Menu
         private GameObject _mainMenu;
 
         [SerializeField]
-        private GameObject _levels ;
+        private GameObject _levels;
 
         [SerializeField]
         private GameObject _settings;
