@@ -1,4 +1,4 @@
-using AngryBirds3D.Birds;
+using System;
 using AngryBirds3D.Destroyables.Fortifications;
 using AngryBirds3D.Destroyables.Pigs;
 using AngryBirds3D.Throwables.Birds;
@@ -8,6 +8,8 @@ namespace AngryBirds3D.Level.Score
 {
     public class ScoreSystem : MonoBehaviour
     {
+        public event Action ScoreUpdatedEvent;
+
         [SerializeField]
         private LevelDataScriptableObject _levelData;
 
@@ -40,11 +42,15 @@ namespace AngryBirds3D.Level.Score
         private void ScorePig(int score)
         {
             _currentSessionLevelScore.DefeatedPigsScore += score;
+            _currentSessionLevelScore.Score += score;
+            ScoreUpdatedEvent?.Invoke();
         }
 
         private void ScoreFortification(int score)
         {
             _currentSessionLevelScore.DestroyedFortificationsScore += score;
+            _currentSessionLevelScore.Score += score;
+            ScoreUpdatedEvent?.Invoke();
         }
 
         public void CalculateCurrentSessionLevelScoreAndSaveBest()
@@ -56,9 +62,9 @@ namespace AngryBirds3D.Level.Score
         private void CurrentSessionResultsCalculations()
         {
             // score (pigs and fortifications only)
-            _currentSessionLevelScore.Score = 
-                _currentSessionLevelScore.DefeatedPigsScore +
-                _currentSessionLevelScore.DestroyedFortificationsScore;
+            // _currentSessionLevelScore.Score = 
+            //     _currentSessionLevelScore.DefeatedPigsScore +
+            //     _currentSessionLevelScore.DestroyedFortificationsScore;
 
             // is passed / stars
             int remainedPigs = _pigsTrack.PigsCount();
