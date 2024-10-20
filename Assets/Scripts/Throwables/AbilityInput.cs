@@ -1,6 +1,8 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
@@ -25,8 +27,26 @@ namespace AngryBirds3D.Throwables
 
         void Update()
         {
-            ServeTouchInput();
+            if (IsConditionsFitInputServe())
+            {
+                ServeTouchInput();
+            }
         }
+
+		private bool IsConditionsFitInputServe()
+		{
+			return IsInputAllowed() && IsNotTouchTheUI();
+		}
+
+		private bool IsInputAllowed()
+		{
+			return EnhancedTouchSupport.enabled;
+		}
+
+		private bool IsNotTouchTheUI()
+		{
+			return !EventSystem.current.IsPointerOverGameObject();
+		}
 
         private void ServeTouchInput()
         {
