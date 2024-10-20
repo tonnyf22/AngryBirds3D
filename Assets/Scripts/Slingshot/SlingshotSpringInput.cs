@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
@@ -52,8 +54,26 @@ namespace AngryBirds3D.Slingshot
 
 		void Update()
 		{
-			ServeTensionInput();
-			ServeAimInput();
+			if (IsConditionsFitInputServe())
+			{
+				ServeTensionInput();
+				ServeAimInput();
+			}
+		}
+
+		private bool IsConditionsFitInputServe()
+		{
+			return IsInputAllowed() && IsNotTouchTheUI();
+		}
+
+		private bool IsInputAllowed()
+		{
+			return EnhancedTouchSupport.enabled;
+		}
+
+		private bool IsNotTouchTheUI()
+		{
+			return !EventSystem.current.IsPointerOverGameObject();
 		}
 
 		private void ServeTensionInput()
