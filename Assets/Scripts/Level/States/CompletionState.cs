@@ -1,4 +1,5 @@
 using AngryBirds3D.Level.Score;
+using AngryBirds3D.UserInterface.Level;
 using UnityEngine;
 
 namespace AngryBirds3D.Level.States
@@ -8,6 +9,9 @@ namespace AngryBirds3D.Level.States
         [SerializeField]
         private ScoreSystem _scoreSystem;
 
+        [SerializeField]
+        private LevelResults _levelResults;
+
         void OnEnable()
         {
             // vfx salute
@@ -15,17 +19,16 @@ namespace AngryBirds3D.Level.States
 
             _scoreSystem.CalculateCurrentSessionLevelScoreAndSaveBest();
 
-            LevelScore ls = _scoreSystem.CurrentSessionLevelScore ;
+            // LevelScore ls = _scoreSystem.CurrentSessionLevelScore ;
 
-            print("is level passed: " + ls.IsLevelPassed);
-            print("score: " + ls.Score);
-            print("defeated pigs score: " + ls.DefeatedPigsScore);
-            print("destroyed fortifications score: " + ls.DestroyedFortificationsScore);
-            print("stars score: " + ls.StarsScore);
-            print("saved birds score: " + ls.SavedBirdsScore);
+            // print("is level passed: " + ls.IsLevelPassed);
+            // print("score: " + ls.Score);
+            // print("defeated pigs score: " + ls.DefeatedPigsScore);
+            // print("destroyed fortifications score: " + ls.DestroyedFortificationsScore);
+            // print("stars score: " + ls.StarsScore);
+            // print("saved birds score: " + ls.SavedBirdsScore);
 
-            // show score on ui (with event or what ??? think about this, ok ...)
-
+            _levelResults.ShowLevelResults();
         }
 
         void OnDisable()
