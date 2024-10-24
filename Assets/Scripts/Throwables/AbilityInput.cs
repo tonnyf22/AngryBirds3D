@@ -10,7 +10,7 @@ namespace AngryBirds3D.Throwables
 {
     public class AbilityInput : MonoBehaviour
     {
-        public event Action AbilityActivatedEvent;
+        public event Action AbilityActivatedByInputEvent;
 
         [SerializeField]
         private InputAction _touchInputAction;
@@ -65,7 +65,7 @@ namespace AngryBirds3D.Throwables
                 if (touch.phase == TouchPhase.Began)
                 {
                     _touchInputAction.Disable();
-                    AbilityActivatedEvent?.Invoke();
+                    AbilityActivatedByInputEvent?.Invoke();
                 }
             }
         }
