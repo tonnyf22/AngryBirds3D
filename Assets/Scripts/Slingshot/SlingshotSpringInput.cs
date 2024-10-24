@@ -14,6 +14,7 @@ namespace AngryBirds3D.Slingshot
 
 		public event Action<float> RotateSlingshotEvent;
 
+		public event Action FirstTensionMadeEvent;
 		public event Action InitiateReleaseLogicEvent;
 
 		[SerializeField]
@@ -24,6 +25,8 @@ namespace AngryBirds3D.Slingshot
 		private float _horizontalAimSensitivity;
 
 		private Camera _camera;
+
+		private bool isFirstTension = true;
 		
 		// raycast related
 		private Ray _ray;
@@ -100,6 +103,12 @@ namespace AngryBirds3D.Slingshot
 				{
 					if (_tensionTouch.phase == TouchPhase.Moved || _tensionTouch.phase == TouchPhase.Stationary)
 					{
+                        if (isFirstTension)
+                        {
+                            FirstTensionMadeEvent?.Invoke();
+                            isFirstTension = false;
+                        }
+
 						// thats a prediction obviously
 
 						if (IsHitTensionPlane(_tensionTouch.screenPosition))
@@ -116,6 +125,8 @@ namespace AngryBirds3D.Slingshot
 						// thats a release obviously
 
 						_isTensionTouchTracked = false;
+
+						isFirstTension = true;
 
 						InitiateReleaseLogicEvent?.Invoke();
 					}
