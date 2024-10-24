@@ -21,13 +21,14 @@ namespace AngryBirds3D.Destroyables.Fortifications
 			for (int i = 0; i < parent.transform.childCount; i++)
 			{
 				Transform childTransform = parent.transform.GetChild(i);
-				if (childTransform.childCount > 0)
-				{
-					SeekForLastChildren(childTransform);
-				}
-				else
+
+				if (childTransform.gameObject.TryGetComponent<Fortification>(out _))
 				{
 					_fortifications.Add(childTransform.gameObject);
+				}
+				else if (childTransform.childCount > 0)
+				{
+					SeekForLastChildren(childTransform);
 				}
 			}
 		}
