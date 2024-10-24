@@ -42,7 +42,7 @@ namespace AngryBirds3D.Destroyables.Pigs
 				Pig pigLogic = pig.GetComponent<Pig>();
 
 				pigLogic.ScoreEvent += Score;
-				pigLogic.PigDefeatedEvent += PigDefeated;
+				pigLogic.PigInstanceDefeatedEvent += PigDefeated;
 			}
 		}
 
