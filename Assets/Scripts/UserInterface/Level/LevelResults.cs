@@ -34,10 +34,15 @@ namespace AngryBirds3D.UserInterface.Level
 
         public void ShowLevelResults()
         {
-            TurnOnMusic();
+            // TurnOnMusic();
             HideLiveLevelUI();
             ShowResultsUI();
             FillResults();
+        }
+
+        public bool IsSuccessfullyPassed()
+        {
+            return _scoreSystem.CurrentSessionLevelScore.IsLevelPassed;
         }
 
         private void TurnOnMusic()
