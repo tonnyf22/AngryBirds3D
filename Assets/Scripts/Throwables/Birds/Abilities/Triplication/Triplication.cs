@@ -1,5 +1,7 @@
+using System;
 using AngryBirds3D.Throwables;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace AngryBirds3D.Birds.Abilities.Triplication
 {
@@ -31,7 +33,7 @@ namespace AngryBirds3D.Birds.Abilities.Triplication
 			_sc = GetComponent<SphereCollider>();
 		}
 
-		protected override void AbilityActivated()
+		protected override void AbilityActivatedByInput()
 		{
 			_currentVelocity = _rb.velocity.magnitude;
 
