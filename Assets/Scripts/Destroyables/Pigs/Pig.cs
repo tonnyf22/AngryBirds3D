@@ -5,11 +5,13 @@ namespace AngryBirds3D.Destroyables.Pigs
 {
     public class Pig : Destroyable
     {
-        public event Action<GameObject> PigDefeatedEvent;
+        public event Action PigDefeatedEvent;
+        public event Action<GameObject> PigInstanceDefeatedEvent;
 
         protected override void ObjectDestroyedSpecificLogic()
         {
-            PigDefeatedEvent?.Invoke(gameObject);
+            PigDefeatedEvent?.Invoke();
+            PigInstanceDefeatedEvent?.Invoke(gameObject);
         }
     }
 }
