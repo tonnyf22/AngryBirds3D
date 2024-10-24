@@ -6,6 +6,8 @@ namespace AngryBirds3D.Birds
 {
     public abstract class BirdAbility : MonoBehaviour
     {
+        public event Action AbilityActivatedEvent;
+
         [SerializeField]
         [Range(1, 50000)]
         private int _pointsForSave;
@@ -24,7 +26,8 @@ namespace AngryBirds3D.Birds
 
         void OnEnable()
         {
-            _abilityInput.AbilityActivatedEvent += AbilityActivated;
+            _abilityInput.AbilityActivatedByInputEvent += AbilityActivatedByInput;
+            _abilityInput.AbilityActivatedByInputEvent += AbilityActivated;
         }
 
         void OnDisable()
@@ -44,7 +47,8 @@ namespace AngryBirds3D.Birds
         {
             if (IsNotUnsubscribedFromAbilityActivation())
             {
-                _abilityInput.AbilityActivatedEvent -= AbilityActivated;
+                _abilityInput.AbilityActivatedByInputEvent -= AbilityActivatedByInput;
+                _abilityInput.AbilityActivatedByInputEvent -= AbilityActivated;
                 _isUnsubscribedFromAbilityActivation = true;
             }
         }
@@ -54,6 +58,11 @@ namespace AngryBirds3D.Birds
             return !_isUnsubscribedFromAbilityActivation;
         }
 
-        protected abstract void AbilityActivated();
+        protected abstract void AbilityActivatedByInput();
+
+        private void AbilityActivated()
+        {
+            AbilityActivatedEvent?.Invoke();
+        }
     }
 }
