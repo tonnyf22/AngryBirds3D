@@ -9,6 +9,9 @@ namespace AngryBirds3D.Level.States
     public class CompletionState : MonoBehaviour
     {
         [SerializeField]
+        private PauseManager _pauseManager;
+
+        [SerializeField]
         private AudioEffects _audioEffects;
         [SerializeField]
         private VisualEffects _visualEffects;
@@ -21,6 +24,8 @@ namespace AngryBirds3D.Level.States
 
         void OnEnable()
         {
+            _pauseManager.SetPause();
+
             _scoreSystem.CalculateCurrentSessionLevelScoreAndSaveBest();
 
             // vfx salute
