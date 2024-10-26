@@ -17,6 +17,9 @@ namespace AngryBirds3D.Level.States
         [SerializeField]
         private CompletionState _completionState;
 
+        private MonoBehaviour _currentState;
+        public MonoBehaviour CurrentState { get { return _currentState; } }
+
         void Start()
         {
             _passCheckState.enabled = true;
@@ -25,7 +28,15 @@ namespace AngryBirds3D.Level.States
         public void ChangeState(MonoBehaviour fromState, MonoBehaviour toState)
         {
             toState.enabled = true;
+
+            _currentState = toState;
+
             fromState.enabled = false;
+        }
+
+        public bool IsSlingshotAimStateEnabled()
+        {
+            return _slingshotAimState.enabled;
         }
     }
 }
