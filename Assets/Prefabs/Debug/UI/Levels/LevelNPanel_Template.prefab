@@ -1101,8 +1101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _levelData: {fileID: 0}
-  _NumberText: {fileID: 6660908219236333892}
-  _ScoreText: {fileID: 7216135835611815410}
+  _numberText: {fileID: 6660908219236333892}
+  _scoreText: {fileID: 7216135835611815410}
   _starsObjects:
   - {fileID: 6943378951326202500}
   - {fileID: 1611433951214116340}
