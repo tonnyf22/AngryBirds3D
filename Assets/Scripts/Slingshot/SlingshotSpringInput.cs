@@ -26,11 +26,11 @@ namespace AngryBirds3D.Slingshot
 
 		private Camera _camera;
 
-		private bool isFirstTension = true;
+		private bool _isFirstTension = true;
 		
 		// raycast related
-		private Ray _ray;
-		private RaycastHit _hit;
+		private Ray _rayTouchPlane;
+		private RaycastHit _hitTouchPlane;
 
 		private Vector3 _lastHitPoint;
 
@@ -62,6 +62,17 @@ namespace AngryBirds3D.Slingshot
 				ServeTensionInput();
 				ServeAimInput();
 			}
+		}
+
+		public void ResetInput()
+		{
+			_aimTouch = new Touch();
+			_tensionTouch = new Touch();
+
+			_isAimTouchTracked = false;
+			_isTensionTouchTracked = false;
+
+			_isFirstTension = true;
 		}
 
 		private bool IsConditionsFitInputServe()
@@ -103,17 +114,17 @@ namespace AngryBirds3D.Slingshot
 				{
 					if (_tensionTouch.phase == TouchPhase.Moved || _tensionTouch.phase == TouchPhase.Stationary)
 					{
-                        if (isFirstTension)
+                        if (_isFirstTension)
                         {
                             FirstTensionMadeEvent?.Invoke();
-                            isFirstTension = false;
+                            _isFirstTension = false;
                         }
 
 						// thats a prediction obviously
 
 						if (IsHitTensionPlane(_tensionTouch.screenPosition))
 						{
-							_lastHitPoint = _hit.point;
+							_lastHitPoint = _hitTouchPlane.point;
 						}
 
 						ChangeThrowablePositionAndForwardDirectionEvent?.Invoke(_lastHitPoint);
@@ -126,7 +137,7 @@ namespace AngryBirds3D.Slingshot
 
 						_isTensionTouchTracked = false;
 
-						isFirstTension = true;
+						_isFirstTension = true;
 
 						InitiateReleaseLogicEvent?.Invoke();
 					}
@@ -136,13 +147,13 @@ namespace AngryBirds3D.Slingshot
 
 		private bool IsHitTensionPlane(Vector2 screenTouchPosition)
 		{
-			_ray = 
+			_rayTouchPlane = 
 				_camera.ScreenPointToRay(screenTouchPosition);
 
 			return 
 				Physics.Raycast(
-					_ray, 
-					out _hit, 
+					_rayTouchPlane, 
+					out _hitTouchPlane, 
 					Mathf.Infinity, 
 					_touchPlaneLayer);
 		}
