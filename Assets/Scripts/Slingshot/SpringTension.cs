@@ -159,8 +159,7 @@ namespace AngryBirds3D.Slingshot
 
 		private void CleanUpAfterShot()
 		{
-			_trajectoryPrediction.HideUnusedDotsStartingAfter(-1);
-			_trajectoryPrediction.HideHitMark();
+			RestoreTrajectoryPrediction();
 			ForgetThrowableRigidbody();
 			RestoreShotPointActual();
 		}
@@ -170,7 +169,13 @@ namespace AngryBirds3D.Slingshot
 			_rigidBodyThrowable = null;
 		}
 
-		private void RestoreShotPointActual()
+		public void RestoreTrajectoryPrediction()
+		{
+			_trajectoryPrediction.HideUnusedDotsStartingAfter(-1);
+			_trajectoryPrediction.HideHitMark();
+		}
+
+		public void RestoreShotPointActual()
 		{
 			_shotPointActual.position = _shotPointReference.position;
 			_shotPointActual.forward = Vector3.forward;
