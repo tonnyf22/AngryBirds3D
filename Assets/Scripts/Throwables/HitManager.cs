@@ -17,6 +17,8 @@ namespace AngryBirds3D.Throwables
         void OnCollisionEnter(Collision collision)
         {
             OnHitOccuredEvent?.Invoke();
+
+            // #idea: add separate event which is invoked on specific collision force
         }
 
         public void StartDelayAfterHit()
