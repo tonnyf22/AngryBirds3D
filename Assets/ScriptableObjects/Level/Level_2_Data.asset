@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d230cbddff4a90f7696dfecec6a4607b, type: 3}
-  m_Name: Level_1_Data
+  m_Name: Level_2_Data
   m_EditorClassIdentifier: 
-  LevelNumber: 1
+  LevelNumber: 2
   LevelScore:
     IsLevelPassed: 0
     Score: 0
@@ -25,7 +25,7 @@ MonoBehaviour:
     TwoStarScore: 10000
     ThreeStarScore: 20000
   LevelScene:
-    _sceneOB: {fileID: 102900000, guid: 973b3250655542802ad205b6e1c9bcc0, type: 3}
-    _name: Level_1
+    _sceneOB: {fileID: 102900000, guid: 7ff639b446194f94a8aced145c7303f9, type: 3}
+    _name: Level_2
     _path: 
     _buildIndex: -1
