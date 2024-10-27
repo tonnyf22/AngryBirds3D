@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using AngryBirds3D.Birds;
 using UnityEngine;
 
 namespace AngryBirds3D.Throwables.Birds

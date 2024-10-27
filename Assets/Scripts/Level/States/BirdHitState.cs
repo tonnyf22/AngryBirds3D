@@ -1,4 +1,3 @@
-using AngryBirds3D.Birds;
 using AngryBirds3D.GameCamera.Slingshot;
 using AngryBirds3D.Slingshot;
 using AngryBirds3D.Throwables;

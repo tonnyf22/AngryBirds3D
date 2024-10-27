@@ -1,4 +1,3 @@
-using AngryBirds3D.Birds;
 using UnityEngine;
 
 namespace AngryBirds3D.Throwables.Birds.Abilities.Explosion

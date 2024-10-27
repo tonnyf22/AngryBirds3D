@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using AngryBirds3D.Audio;
-using AngryBirds3D.Birds;
 using AngryBirds3D.Slingshot;
 using UnityEngine;
 

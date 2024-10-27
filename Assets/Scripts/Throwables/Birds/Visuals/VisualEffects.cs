@@ -1,6 +1,5 @@
 using UnityEngine;
 using AngryBirds3D.Visuals;
-using AngryBirds3D.Birds;
 
 namespace AngryBirds3D.Throwables.Birds.Visuals
 {
