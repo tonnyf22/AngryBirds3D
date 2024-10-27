@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace AngryBirds3D.Throwables
 {
-    public class HitManager : MonoBehaviour
+    public class BirdLifeEndManager : MonoBehaviour
     {
-        public event Action OnHitOccuredEvent;
+        public event Action BirdLifeEndedEvent;
         public event Action DelayFinishedEvent;
 
         [SerializeField]
@@ -16,9 +16,14 @@ namespace AngryBirds3D.Throwables
 
         void OnCollisionEnter(Collision collision)
         {
-            OnHitOccuredEvent?.Invoke();
+            BirdLifeEndedEvent?.Invoke();
 
             // #idea: add separate event which is invoked on specific collision force
+        }
+
+        public void NotifyAboutBirdLifeEnd()
+        {
+            BirdLifeEndedEvent?.Invoke();
         }
 
         public void StartDelayAfterHit()
