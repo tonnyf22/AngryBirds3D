@@ -9,7 +9,7 @@ namespace AngryBirds3D.Throwables.Birds.Visuals
         [SerializeField]
         private BirdAbility _birdAbility;
         [SerializeField]
-        private HitManager _hitManager;
+        private BirdLifeEndManager _hitManager;
 
         [SerializeField]
         private ParticleSystem _abilityActivationParticleSystem;
@@ -19,7 +19,7 @@ namespace AngryBirds3D.Throwables.Birds.Visuals
         void OnEnable()
         {
             _birdAbility.AbilityActivatedEvent += PlayAbilityActivationEffect;
-            _hitManager.OnHitOccuredEvent += PlayHitEffect;
+            _hitManager.BirdLifeEndedEvent += PlayHitEffect;
         }
 
         private void PlayAbilityActivationEffect()
@@ -35,7 +35,7 @@ namespace AngryBirds3D.Throwables.Birds.Visuals
         void OnDisable()
         {
             _birdAbility.AbilityActivatedEvent += PlayAbilityActivationEffect;
-            _hitManager.OnHitOccuredEvent += PlayHitEffect;
+            _hitManager.BirdLifeEndedEvent += PlayHitEffect;
         }
     }
 }

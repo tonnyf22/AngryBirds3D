@@ -13,7 +13,7 @@ namespace AngryBirds3D.Throwables.Birds.Audio
         [SerializeField]
         private BirdAbility _birdAbility;
         [SerializeField]
-        private HitManager _hitManager;
+        private BirdLifeEndManager _hitManager;
 
         [SerializeField]
         [Range(1, 20)]
@@ -40,7 +40,7 @@ namespace AngryBirds3D.Throwables.Birds.Audio
         {
             _slingshotSpringInput.InitiateReleaseLogicEvent += ReleaseInitiated;
             _birdAbility.AbilityActivatedEvent += PlayAbilityActivationClip;
-            _hitManager.OnHitOccuredEvent += PlayHitClip;
+            _hitManager.BirdLifeEndedEvent += PlayHitClip;
         }
 
         private void SetupSlingshotSpringInput()
@@ -107,7 +107,7 @@ namespace AngryBirds3D.Throwables.Birds.Audio
         {
             _slingshotSpringInput.InitiateReleaseLogicEvent -= ReleaseInitiated;
             _birdAbility.AbilityActivatedEvent -= PlayAbilityActivationClip;
-            _hitManager.OnHitOccuredEvent -= PlayHitClip;
+            _hitManager.BirdLifeEndedEvent -= PlayHitClip;
         }
     }
 }
