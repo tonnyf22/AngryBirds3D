@@ -33,14 +33,6 @@ namespace AngryBirds3D.Level.States
             StartDelayAfterHit();
         }
 
-        // were not disabled on previous state, so no need to enable again
-		// private void EnableNecessaryFunctionality()
-		// {
-		// 	_abilityInput.enabled = true;
-		// 	_birdAbilityInput.enabled = true;
-		// 	_hitManager.enabled = true;
-		// }
-
 		private void SetUpVariables()
 		{
 			_abilityInput = 
@@ -96,7 +88,7 @@ namespace AngryBirds3D.Level.States
 		private void DisableUsedFunctionality()
 		{
 			_abilityInput.enabled = false;
-			// _birdAbility.enabled = false;
+
 			_hitManager.enabled = false;
 		}
 

@@ -34,7 +34,6 @@ namespace AngryBirds3D.UserInterface.Level
 
         public void ShowLevelResults()
         {
-            // TurnOnMusic();
             HideLiveLevelUI();
             ShowResultsUI();
             FillResults();

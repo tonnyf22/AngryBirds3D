@@ -21,9 +21,6 @@ namespace AngryBirds3D.Level.States
 
 		void OnEnable()
 		{
-			// enable necessary scripts on objects
-			// don't really need any specific "per-state" functionality
-
 			DetermineNextState();
 		}
 

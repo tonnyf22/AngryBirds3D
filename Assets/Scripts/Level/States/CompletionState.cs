@@ -28,8 +28,6 @@ namespace AngryBirds3D.Level.States
 
             _scoreSystem.CalculateCurrentSessionLevelScoreAndSaveBest();
 
-            // vfx salute
-            // sfx and / or music
             if (_levelResults.IsSuccessfullyPassed())
             {
                 _audioEffects.PlaySuccessfulPassClip();
@@ -39,15 +37,6 @@ namespace AngryBirds3D.Level.States
             {
                 _audioEffects.PlayNotPassClip();
             }
-
-            // LevelScore ls = _scoreSystem.CurrentSessionLevelScore ;
-
-            // print("is level passed: " + ls.IsLevelPassed);
-            // print("score: " + ls.Score);
-            // print("defeated pigs score: " + ls.DefeatedPigsScore);
-            // print("destroyed fortifications score: " + ls.DestroyedFortificationsScore);
-            // print("stars score: " + ls.StarsScore);
-            // print("saved birds score: " + ls.SavedBirdsScore);
 
             _levelResults.ShowLevelResults();
         }

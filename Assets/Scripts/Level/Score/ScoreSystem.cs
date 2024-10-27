@@ -61,12 +61,6 @@ namespace AngryBirds3D.Level.Score
 
         private void CurrentSessionResultsCalculations()
         {
-            // score (pigs and fortifications only)
-            // _currentSessionLevelScore.Score = 
-            //     _currentSessionLevelScore.DefeatedPigsScore +
-            //     _currentSessionLevelScore.DestroyedFortificationsScore;
-
-            // is passed / stars
             int remainedPigs = _pigsTrack.PigsCount();
             if (remainedPigs > 0)
             {

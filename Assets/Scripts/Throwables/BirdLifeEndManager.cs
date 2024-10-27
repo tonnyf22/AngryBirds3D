@@ -17,8 +17,6 @@ namespace AngryBirds3D.Throwables
         void OnCollisionEnter(Collision collision)
         {
             BirdLifeEndedEvent?.Invoke();
-
-            // #idea: add separate event which is invoked on specific collision force
         }
 
         public void NotifyAboutBirdLifeEnd()

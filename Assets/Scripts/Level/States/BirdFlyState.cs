@@ -83,14 +83,11 @@ namespace AngryBirds3D.Level.States
 			UnsubscribeFromUsedEvents();
 		}
 
-		// turn of on the exiting from bird hit state
 		private void DisableUsedFunctionality()
 		{
 			_throwableTrack.enabled = false;
 
-		// 	_abilityInput.enabled = false;
 			_birdAbility.enabled = false;
-		// 	_hitManager.enabled = false;
 
 			_forwardLookManager.enabled = false;
 		}

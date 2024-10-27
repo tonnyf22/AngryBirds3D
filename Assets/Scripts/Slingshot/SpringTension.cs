@@ -122,7 +122,6 @@ namespace AngryBirds3D.Slingshot
 		private void FreeThrowable()
 		{
 			_throwableContainer.FreeThrowable();
-			// _throwableContainer.ForgetThrowable();
 		}
 
 		private void ReleaseCurrentThrowableAndAddImpulse()

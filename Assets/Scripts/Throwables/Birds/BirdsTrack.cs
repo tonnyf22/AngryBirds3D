@@ -19,14 +19,8 @@ namespace AngryBirds3D.Throwables.Birds
             for (int i = 0; i < parent.transform.childCount; i++)
             {
                 Transform childTransform = parent.transform.GetChild(i);
-                // if (childTransform.childCount > 0)
-                // {
-                //     SeekForLastChildren(childTransform);
-                // }
-                // else
-                // {
-                    _birds.Add(childTransform.gameObject);
-                // }
+
+                _birds.Add(childTransform.gameObject);
             }
         }
 

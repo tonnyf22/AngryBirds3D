@@ -16,8 +16,6 @@ namespace AngryBirds3D.Throwables.Birds.Abilities.Explosion
 
             _birdLifeEndManager.NotifyAboutBirdLifeEnd();
 
-            // Destroy(gameObject);
-            // gameObject.SetActive(false);
             MockBirdDestroyment();
         }
 

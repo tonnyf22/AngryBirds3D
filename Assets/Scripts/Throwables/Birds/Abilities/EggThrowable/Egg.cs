@@ -26,7 +26,6 @@ namespace AngryBirds3D.Throwables.Birds.Abilities.EggThrowable
             Instantiate(_impactPrefab, transform.position, Quaternion.identity);
 
             Destroy(gameObject);
-            // gameObject.SetActive(false);
         }
     }
 }

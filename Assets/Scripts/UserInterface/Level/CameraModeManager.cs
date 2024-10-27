@@ -20,8 +20,6 @@ namespace AngryBirds3D.UserInterface.Level
 
         private CameraMode _currentCameraMode = CameraMode.Slingshot;
 
-        // disable button when in fly state
-
         public void ToggleCameraMode()
         {
             switch (_currentCameraMode)

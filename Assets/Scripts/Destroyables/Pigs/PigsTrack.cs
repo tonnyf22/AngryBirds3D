@@ -24,14 +24,8 @@ namespace AngryBirds3D.Destroyables.Pigs
 			for (int i = 0; i < parent.transform.childCount; i++)
 			{
 				Transform childTransform = parent.transform.GetChild(i);
-				// if (childTransform.childCount > 0)
-				// {
-				// 	SeekForLastChildren(childTransform);
-				// }
-				// else
-				// {
-					_pigs.Add(childTransform.gameObject);
-				// }
+
+                _pigs.Add(childTransform.gameObject);
 			}
 		}
 
@@ -48,16 +42,10 @@ namespace AngryBirds3D.Destroyables.Pigs
 
 		private void PigDefeated(GameObject pig)
 		{
-			// wow, accidentally got big brain move here:
-			// like every pig's defeat will concentrate on this particular event
-			// like reinvoking it from one class
-			// Is it coolness or stupidity ??? The last one pbly...
 			PigDefeatedEvent?.Invoke(pig);
 
 			_pigs.Remove(pig);
 
-			// What is that? You really need this mess here ???
-			// Yeah, I DO need. I have even subscribed to this event already B)
 			if (PigsCount() == 0)
 			{
 				AllPigsDefeatedEvent?.Invoke();

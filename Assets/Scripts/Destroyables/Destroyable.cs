@@ -45,15 +45,13 @@ namespace AngryBirds3D.Destroyables
 		private void CollisionCheck(Collision collision)
 		{
 			float impulseMagnitude = collision.impulse.magnitude;
-			// Debug.Log(gameObject.name + " impulse : " + impulseMagnitude);
 
 			if (IsEnoughKickPowerToCauseDamage(impulseMagnitude))
 			{
-                // Debug.Log(gameObject.name + " before damage : current_health : " + _currentHealth);
 				float damage = CalculateDamage(impulseMagnitude);
-                // Debug.Log(gameObject.name + " damage : " + damage);
+
 				ApplyDamage(damage);
-                // Debug.Log(gameObject.name + " after damage : current_health : " + _currentHealth);
+
 				CheckHealthStatus();
 			}
 		}

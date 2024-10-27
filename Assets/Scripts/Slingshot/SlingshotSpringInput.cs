@@ -31,7 +31,6 @@ namespace AngryBirds3D.Slingshot
 
 		private bool _isFirstTension = true;
 		
-		// raycast related
 		private Ray _rayTouchPlane;
 		private RaycastHit _hitTouchPlane;
 
@@ -121,7 +120,7 @@ namespace AngryBirds3D.Slingshot
 
 						if (IsHitTensionPlane(_tensionTouch.screenPosition))
 						{
-                            // thats a prediction obviously
+                            // prediction
 
                             _lastHitPoint = _hitTouchPlane.point;
 
@@ -131,7 +130,7 @@ namespace AngryBirds3D.Slingshot
 						}
                         else
                         {
-							// thats a reset obviously
+							// reset
 
                             _springTension.RestoreTrajectoryPrediction();
                             _springTension.RestoreShotPointActual();
@@ -140,7 +139,7 @@ namespace AngryBirds3D.Slingshot
 					}
 					else if (_tensionTouch.phase == TouchPhase.Ended || _tensionTouch.phase == TouchPhase.Canceled)
 					{
-						// thats a release obviously
+						// release
 
 						_isTensionTouchTracked = false;
 

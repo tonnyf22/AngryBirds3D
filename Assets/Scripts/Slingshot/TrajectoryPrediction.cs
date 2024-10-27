@@ -95,7 +95,6 @@ namespace AngryBirds3D.Slingshot
 					);
 				if (isCollisionDetected)
 				{
-					// SetTrajectoryDotPositionAndRevealIt(dotIndex, hit.point);
 					SetHitMarkerPositionAndRevealIt(hit.point);
 					
 					isHitGround = true;
