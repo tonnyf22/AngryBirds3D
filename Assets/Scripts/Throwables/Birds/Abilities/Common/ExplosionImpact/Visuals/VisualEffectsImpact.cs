@@ -1,7 +1,7 @@
 using AngryBirds3D.Visuals;
 using UnityEngine;
 
-namespace AngryBirds3D.Throwables.Birds.Abilities.Explosion.Visuals
+namespace AngryBirds3D.Throwables.Birds.Abilities.Common.ExplosionImpact.Visuals
 {
     public class VisualEffectsImpact : ObjectVisuals
     {

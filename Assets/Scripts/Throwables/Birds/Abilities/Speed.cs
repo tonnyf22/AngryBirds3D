@@ -1,4 +1,5 @@
 using System;
+using AngryBirds3D.Throwables.Birds;
 using UnityEngine;
 
 namespace AngryBirds3D.Birds.Abilities

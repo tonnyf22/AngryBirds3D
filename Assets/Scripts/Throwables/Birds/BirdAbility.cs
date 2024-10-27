@@ -2,7 +2,7 @@ using System;
 using AngryBirds3D.Throwables;
 using UnityEngine;
 
-namespace AngryBirds3D.Birds
+namespace AngryBirds3D.Throwables.Birds
 {
     public abstract class BirdAbility : MonoBehaviour
     {

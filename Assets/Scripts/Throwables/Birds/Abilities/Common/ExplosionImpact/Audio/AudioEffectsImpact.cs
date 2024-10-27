@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using AngryBirds3D.Audio;
 using UnityEngine;
 
-namespace AngryBirds3D.Throwables.Birds.Abilities.Explosion.Audio
+namespace AngryBirds3D.Throwables.Birds.Abilities.Common.ExplosionImpact.Audio
 {
     public class AudioEffectsImpact : ObjectAudio
     {

@@ -1,5 +1,6 @@
 using System;
 using AngryBirds3D.Throwables;
+using AngryBirds3D.Throwables.Birds;
 using UnityEngine;
 using Random = UnityEngine.Random;
 

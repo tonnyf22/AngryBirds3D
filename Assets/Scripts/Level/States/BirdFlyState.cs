@@ -1,6 +1,7 @@
 using AngryBirds3D.Birds;
 using AngryBirds3D.Slingshot;
 using AngryBirds3D.Throwables;
+using AngryBirds3D.Throwables.Birds;
 using UnityEngine;
 
 namespace AngryBirds3D.Level.States

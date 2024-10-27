@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AngryBirds3D.Throwables.Birds.Abilities.ExplosionImpact
+namespace AngryBirds3D.Throwables.Birds.Abilities.Common.ExplosionImpact
 {
     [RequireComponent(typeof(SphereCollider))]
     public class Impact : MonoBehaviour
