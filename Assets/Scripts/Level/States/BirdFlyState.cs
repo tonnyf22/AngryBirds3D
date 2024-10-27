@@ -21,7 +21,7 @@ namespace AngryBirds3D.Level.States
 
 		private AbilityInput _abilityInput;
 		private BirdAbility _birdAbility;
-		private HitManager _hitManager;
+		private BirdLifeEndManager _hitManager;
 
 		private ForwardLookManager _forwardLookManager;
 
@@ -58,7 +58,7 @@ namespace AngryBirds3D.Level.States
 			_hitManager = 
 				_throwableContainer
 				.CurrentThrowable
-				.GetComponent<HitManager>();
+				.GetComponent<BirdLifeEndManager>();
 
 			_forwardLookManager = 
 				_throwableContainer
@@ -68,7 +68,7 @@ namespace AngryBirds3D.Level.States
 
 		private void SubscribeToNecessaryEvents()
 		{
-			_hitManager.OnHitOccuredEvent += ChangeLogicalState;
+			_hitManager.BirdLifeEndedEvent += ChangeLogicalState;
 		}
 
 		private void ChangeLogicalState()
@@ -97,7 +97,7 @@ namespace AngryBirds3D.Level.States
 
 		private void UnsubscribeFromUsedEvents()
 		{
-			_hitManager.OnHitOccuredEvent -= ChangeLogicalState;
+			_hitManager.BirdLifeEndedEvent -= ChangeLogicalState;
 		}
 	}
 }

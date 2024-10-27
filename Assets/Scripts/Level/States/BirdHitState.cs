@@ -22,7 +22,7 @@ namespace AngryBirds3D.Level.States
 
         private AbilityInput _abilityInput;
         private BirdAbility _birdAbility;
-        private HitManager _hitManager;
+        private BirdLifeEndManager _hitManager;
 
         void OnEnable()
         {
@@ -54,7 +54,7 @@ namespace AngryBirds3D.Level.States
 			_hitManager = 
 				_throwableContainer
 				.CurrentThrowable
-				.GetComponent<HitManager>();
+				.GetComponent<BirdLifeEndManager>();
 		}
 
 		private void SubscribeToNecessaryEvents()
