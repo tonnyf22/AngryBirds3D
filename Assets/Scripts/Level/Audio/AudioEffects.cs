@@ -33,15 +33,5 @@ namespace AngryBirds3D.Level.Audio
 
             _audioSource.PlayOneShot(clip);
         }
-
-        void OnEnable()
-        {
-
-        }
-
-        void OnDisable()
-        {
-            
-        }
     }
 }

@@ -54,10 +54,6 @@ namespace AngryBirds3D.Slingshot
 			_tensionTouch = new Touch();
 		}
 
-		void OnDisable()
-		{
-		}
-
 		void Update()
 		{
 			if (IsConditionsFitInputServe())

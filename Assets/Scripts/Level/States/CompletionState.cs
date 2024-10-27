@@ -51,10 +51,5 @@ namespace AngryBirds3D.Level.States
 
             _levelResults.ShowLevelResults();
         }
-
-        void OnDisable()
-        {
-            // only reload / quit to menu after, dk whether need this method
-        }
     }
 }

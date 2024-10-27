@@ -12,15 +12,5 @@ namespace AngryBirds3D.Level.Visuals
         {
             InstantiateAndPlayVisualEffect(_successfulPassParticleSystem);
         }
-
-        void OnEnable()
-        {
-
-        }
-
-        void OnDisable()
-        {
-            
-        }
     }
 }

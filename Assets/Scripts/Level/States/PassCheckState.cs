@@ -43,10 +43,5 @@ namespace AngryBirds3D.Level.States
 		{
 			return _pigsTrack.PigsCount() > 0 && _birdsTrack.BirdsCount() > 0;
 		}
-
-		void OnDisable()
-		{
-			// no specific functionality was enabled, so no need to disable anything
-		}
 	}
 }
