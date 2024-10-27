@@ -18,6 +18,9 @@ namespace AngryBirds3D.Slingshot
 		public event Action InitiateReleaseLogicEvent;
 
 		[SerializeField]
+		private SpringTension _springTension;
+
+		[SerializeField]
 		private LayerMask _touchPlaneLayer;
 
 		[SerializeField]
@@ -120,16 +123,24 @@ namespace AngryBirds3D.Slingshot
                             _isFirstTension = false;
                         }
 
-						// thats a prediction obviously
-
 						if (IsHitTensionPlane(_tensionTouch.screenPosition))
 						{
-							_lastHitPoint = _hitTouchPlane.point;
+                            // thats a prediction obviously
+
+                            _lastHitPoint = _hitTouchPlane.point;
+
+                            ChangeThrowablePositionAndForwardDirectionEvent?.Invoke(_lastHitPoint);
+
+                            RecalculateTrajectoryPredictionEvent?.Invoke();
 						}
+                        else
+                        {
+							// thats a reset obviously
 
-						ChangeThrowablePositionAndForwardDirectionEvent?.Invoke(_lastHitPoint);
-
-						RecalculateTrajectoryPredictionEvent?.Invoke();
+                            _springTension.RestoreTrajectoryPrediction();
+                            _springTension.RestoreShotPointActual();
+                            ResetInput();
+                        }
 					}
 					else if (_tensionTouch.phase == TouchPhase.Ended || _tensionTouch.phase == TouchPhase.Canceled)
 					{
