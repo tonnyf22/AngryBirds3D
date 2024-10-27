@@ -9,7 +9,7 @@ namespace AngryBirds3D.Birds.Abilities.Triplication
 	public class Triplication : BirdAbility
 	{
 		[SerializeField]
-		private GameObject birdPrefabPhysicsOnly;
+		private GameObject _birdPrefabPhysicsOnly;
 
 		[SerializeField]
 		[Range(10.0f, 45.0f)]
@@ -121,7 +121,7 @@ namespace AngryBirds3D.Birds.Abilities.Triplication
 		{
 			GameObject bird1 = 
 				Instantiate(
-					birdPrefabPhysicsOnly, 
+					_birdPrefabPhysicsOnly, 
 					_birdOnePosition, 
 					Quaternion.identity);
 			bird1.transform.forward = _birdOneDirection;
@@ -133,7 +133,7 @@ namespace AngryBirds3D.Birds.Abilities.Triplication
 
 			GameObject bird2 = 
 				Instantiate(
-					birdPrefabPhysicsOnly, 
+					_birdPrefabPhysicsOnly, 
 					_birdTwoPosition, 
 					Quaternion.identity);
 			bird2.transform.forward = _birdTwoDirection;
