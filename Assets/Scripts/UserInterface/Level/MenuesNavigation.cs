@@ -44,22 +44,22 @@ namespace AngryBirds3D.UserInterface.Level
 
         public void LoadPreviousLevel()
         {
-            SceneManager.LoadScene(_previousLevelScene.BuildIndex);
+            SceneManager.LoadScene(_previousLevelScene.Name);
         }
 
         public void LoadSameLevel()
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         public void LoadNextLevel()
         {
-            SceneManager.LoadScene(_nextLevelScene.BuildIndex);
+            SceneManager.LoadScene(_nextLevelScene.Name);
         }
 
         public void ExitToMainMenu()
         {
-            SceneManager.LoadScene(_menuScene.BuildIndex);
+            SceneManager.LoadScene(_menuScene.Name);
         }
     }
 }
