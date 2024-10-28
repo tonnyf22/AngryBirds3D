@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using AngryBirds3D.Destroyables.Fortifications;
 using AngryBirds3D.Destroyables.Pigs;
 using AngryBirds3D.Throwables.Birds;
@@ -56,7 +57,8 @@ namespace AngryBirds3D.Level.Score
         public void CalculateCurrentSessionLevelScoreAndSaveBest()
         {
             CurrentSessionResultsCalculations();
-            SaveBest();
+            SaveBestToMemory();
+            SaveBestToScriptableObject();
         }
 
         private void CurrentSessionResultsCalculations()
@@ -122,7 +124,44 @@ namespace AngryBirds3D.Level.Score
             }
         }
 
-        private void SaveBest()
+        private void SaveBestToMemory()
+        {
+            string json = CreateJSONFromLevelScoreData();
+
+            string filePath = CreateFilePathToJSON();
+            
+            WriteJSONToFile(json, filePath);
+        }
+
+        private string CreateJSONFromLevelScoreData()
+        {
+            return JsonUtility.ToJson(_currentSessionLevelScore);
+        }
+
+        private string CreateFilePathToJSON()
+        {
+            return
+                Path.Combine(
+                    Application.persistentDataPath, 
+                    "LevelResult", 
+                    $"{_levelData.LevelNumber}.json");
+        }
+
+        private void WriteJSONToFile(string json, string filePath)
+        {
+            try
+            {
+                File.WriteAllText(filePath, json);
+
+                Debug.Log("Successfully saved JSON data: " + filePath);
+            }
+            catch (IOException e)
+            {
+                Debug.LogError("Failed to save JSON data: " + e.Message);
+            }
+        }
+
+        private void SaveBestToScriptableObject()
         {
             if (_currentSessionLevelScore.Score > _levelData.LevelScore.Score)
             {
