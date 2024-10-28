@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -27,5 +27,5 @@ MonoBehaviour:
   LevelScene:
     _sceneOB: {fileID: 102900000, guid: 7ff639b446194f94a8aced145c7303f9, type: 3}
     _name: Level_2
-    _path: 
-    _buildIndex: -1
+    _path: Assets/Scenes/Debug/Level/Level_2.unity
+    _buildIndex: 3

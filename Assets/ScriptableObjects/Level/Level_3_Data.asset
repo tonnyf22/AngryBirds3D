@@ -27,5 +27,5 @@ MonoBehaviour:
   LevelScene:
     _sceneOB: {fileID: 102900000, guid: 354cbfd5882136cc09f07c90893f4b00, type: 3}
     _name: Level_3
-    _path: 
-    _buildIndex: -1
+    _path: Assets/Scenes/Debug/Level/Level_3.unity
+    _buildIndex: 4

@@ -2,7 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
 MonoBehaviour:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 32
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d230cbddff4a90f7696dfecec6a4607b, type: 3}
   m_Name: Level_1_Data
   m_EditorClassIdentifier: 
-  LevelNumber: 1
+  LevelNumber: 0
   LevelScore:
     IsLevelPassed: 0
     Score: 0
@@ -27,5 +27,5 @@ MonoBehaviour:
   LevelScene:
     _sceneOB: {fileID: 102900000, guid: 973b3250655542802ad205b6e1c9bcc0, type: 3}
     _name: Level_1
-    _path: 
-    _buildIndex: -1
+    _path: Assets/Scenes/Debug/Level/Level_1.unity
+    _buildIndex: 2
