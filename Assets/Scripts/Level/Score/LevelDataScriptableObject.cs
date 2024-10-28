@@ -9,6 +9,11 @@ namespace AngryBirds3D.Level.Score
         order = 1)]
     public class LevelDataScriptableObject : ScriptableObject
     {
+        private void OnEnable()
+        {
+            hideFlags = HideFlags.DontUnloadUnusedAsset;
+        }
+
         public string LevelNumber;
 
         public LevelScore LevelScore;
