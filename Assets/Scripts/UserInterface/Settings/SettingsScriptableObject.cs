@@ -8,6 +8,11 @@ namespace AngryBirds3D.UserInterface.Settings
         order = 2)]
     public class SettingsScriptableObject : ScriptableObject
     {
+        private void OnEnable()
+        {
+            hideFlags = HideFlags.DontUnloadUnusedAsset;
+        }
+
         [Range(-80.0f, 0.0f)]
         public float VolumeSFX;
 
