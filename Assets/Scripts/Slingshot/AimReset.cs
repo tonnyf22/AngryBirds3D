@@ -17,7 +17,6 @@ namespace AngryBirds3D.Slingshot
         {
 			if (_levelSM.IsSlingshotAimStateEnabled())
 			{
-				print("active");
                 ResetSlingshotAim();
 			}
         }
