@@ -36,5 +36,11 @@ namespace AngryBirds3D.UserInterface.Level
         {
             EnhancedTouchSupport.Enable();
         }
+
+        void OnDisable()
+        {
+            SetLiveTimeSpeed();
+            EnableTouch();
+        }
     }
 }
