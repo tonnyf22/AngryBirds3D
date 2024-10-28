@@ -8,6 +8,7 @@ namespace AngryBirds3D.Throwables.Birds.Audio
 {
     public class AudioEffects : ObjectAudio
     {
+        private ThrowableContainer _throwableContainer;
         private SlingshotSpringInput _slingshotSpringInput;
         [SerializeField]
         private BirdAbility _birdAbility;
@@ -33,6 +34,7 @@ namespace AngryBirds3D.Throwables.Birds.Audio
         void Awake()
         {
             SetupSlingshotSpringInput();
+            SetupThrowableContainer();
         }
 
         void OnEnable()
@@ -49,10 +51,25 @@ namespace AngryBirds3D.Throwables.Birds.Audio
                 .GetComponent<SlingshotSpringInput>();
         }
 
+        private void SetupThrowableContainer()
+        {
+            _throwableContainer = 
+                GameObject.FindWithTag("ThrowableContainer")
+                .GetComponent<ThrowableContainer>();
+        }
+
         private void ReleaseInitiated()
         {
-            _isNotThrown = false;
-            PlayFlyClip();
+            if (IsCurrentBirdThrowed())
+            {
+                _isNotThrown = false;
+                PlayFlyClip();
+            }
+        }
+
+        private bool IsCurrentBirdThrowed()
+        {
+            return _throwableContainer.CurrentThrowable.Equals(gameObject);
         }
 
         private void PlayFlyClip()
