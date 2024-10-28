@@ -112,11 +112,18 @@ namespace AngryBirds3D.Slingshot
 
 		private void InitiateReleaseLogic()
 		{
+			ResetSlingshotInput();
+
 			ReleaseCurrentThrowableAndAddImpulse();
 
 			FreeThrowable();
 
 			CleanUpAfterShot();
+		}
+
+		private void ResetSlingshotInput()
+		{
+			_slingshotSpringInput.ResetInput();
 		}
 
 		private void FreeThrowable()
